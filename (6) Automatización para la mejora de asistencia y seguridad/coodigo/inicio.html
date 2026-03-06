@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="inicio.css">
+</head>
+<body>
+<div class="index-box">
+  <header >
+    <h1>Bienvenidos a Automatización para la mejora de asistencia y seguridad</h1>
+    </div>
+  </header>
+    <nav class="navbar">
+      <button class="btn-expand" id="btn-expand">></button>
+      <a href="asistencias.html">ASISTENCIAS</a> <br>
+      <a href="contacto.html">CONTACTO</a> <br>
+      <a href="#">CERRAR SESION</a> <br>
+    </nav>
+
+<div class="desc">
+  <p>
+    Automatización para la mejora de asistencia y seguridad es un proyecto que se basa en la seguridad estudiantil y la automatizacion de las asistencias estudiantiles.
+  </p>
+</div>
+  <script>
+    const btnExpand= document.getElementById('btn-expand');
+    const navbar= document.querySelector('.navbar');
+    btnExpand.addEventListener('click', ()=>{
+      navbar.classList.toggle('expanded');
+      if (navbar.classList.contains('expanded')) {
+        btnExpand.textContent= '<';
+      } else {
+        btnExpand.textContent= '>';
+      }
+    });
+  </script>
+
+</body>
+</html>

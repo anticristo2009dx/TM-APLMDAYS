@@ -1,0 +1,97 @@
+html{
+    height: 100%;
+}
+
+body {
+    margin : 0;
+    padding: 0;
+    background: linear-gradient(#305baa, #72b2fc);
+          font-family: "SUSE Mono", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.login{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    padding: 30px;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    border-radius: 10px;
+}
+@import url('https://fonts.googleapis.com/css2?family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+.login h2{
+    color: #000000;
+    padding: 0 0 30px;
+    text-align: center;
+
+}
+.login .login-box {
+    position: relative;
+    color: #000000;
+       font-family: "SUSE Mono", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.login .login-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #2e2e2e;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #2e2e2e;
+    outline: none;
+    background: transparent;
+}
+
+.login .login-box label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    color: #292929;
+    pointer-events: none;
+    transition: .5s;
+    font-size: 16px;
+}
+
+.inicio-caja .usuario-caja input:focus~label,
+.inicio-caja .usuario-caja input:valid~label {
+    top: -20px;
+    left: 0;
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+}
+
+.login a { 
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #ffffff;
+    font: size 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    margin-top: 40px;
+    letter-spacing: 4px;
+    font-family: "SUSE Mono", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background: #2e2e2e;
+  border-radius: 10px;
+  scale: 1;
+      transition: 0.5s;  
+
+}
+
+.login a:hover {
+    background: #2e2e2e;
+    color: #fff;
+    transform: scale(1.2);
+  
+}
