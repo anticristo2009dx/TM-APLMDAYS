@@ -1,1 +1,1 @@
-este es un trabajo de media tecnica de desarrollo de software, no se si estas aca porque eres un integrante, Yeferson, Leslly o un loquito por ahi que consiguió esto, pero sin importar quien seas, suerte entendiendo el codigo salu2
+suerte entendiendo el codigo salu2
