@@ -16,7 +16,7 @@ body{
     width: 100%;
     background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
     padding: 15px 20px;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.774);
 }
 
 .sidebar ul{
@@ -43,6 +43,11 @@ body{
 
 .sidebar li:hover{
     background: rgba(96, 165, 250, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+}
+.sidebar li.active{
+    background: linear-gradient(90deg, #60a5fa, #3b82f6, #1d4ed8);
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
 }
