@@ -1,96 +1,138 @@
-html{
-    height: 100%;
-}
-
+/* Fondo futurista con profundidad */
 body {
-    margin : 0;
-    padding: 0;
-    background: linear-gradient(#ffffff, #000000);
-    font-family: "SUSE Mono", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-}
-
-.login{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 600px;
-    padding: 30px;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.5);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
-    border-radius: 10px;
-}
-@import url('https://fonts.googleapis.com/css2?family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap');
-.login h2{
-    color: #000000;
-    padding: 0 0 30px;
-    text-align: center;
-
-}
-.login .login-box {
-    position: relative;
-    color: #000000;
-       font-family: "SUSE Mono", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-.login .login-box input {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #000000;
-    margin-bottom: 30px;
-    border: none;
-    border-bottom: 1px solid #000000;
-    outline: none;
-    background: transparent;
-}
-
-.login .login-box label{
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px 0;
-    color: #000000;
-    pointer-events: none;
-    transition: .5s;
-    font-size: 16px;
-}
-
-.inicio-caja .usuario-caja input:focus~label,
-.inicio-caja .usuario-caja input:valid~label {
-    top: -20px;
-    left: 0;
-    color: rgb(0, 0, 0);
-    font-size: 12px;
-}
-
-.login a { 
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    color: #ffffff;
-    font: size 16px;
-    text-decoration: none;
-    text-transform: uppercase;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at 20% 20%, #191822, #0f0e1a 80%);
+    color: #e0f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     overflow: hidden;
-    margin-top: 40px;
-    letter-spacing: 4px;
-    font-family: "SUSE Mono", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    background: #000000;
-    border-radius: 10px;
-    scale: 1;
-    transition: 0.5s;  
+}
+
+/* Contenedor principal tipo glass */
+.container {
+    width: 340px;
+    padding: 30px;
+    border-radius: 20px;
+    background: #121027;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(96, 165, 250, 0.1);
+
+    text-align: center;
+}
+
+/* Logo con glow */
+.logo-box {
+    width: 85px;
+    height: 85px;
+    margin: auto;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #191822, #0f0e1a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    position: relative;
+}
+
+/* Indicador activo */
+.status-dot {
+    width: 12px;
+    height: 12px;
+    background: #60a5fa;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    animation: pulse 1.5s infinite;
+}
+
+
+/* Título */
+h1 {
+    margin: 20px 0 5px;
+    letter-spacing: 3px;
+    color: #ffffff;
 
 }
 
-.login a:hover {
-    background: #000000;
-    color: #fff;
-    transform: scale(1.2);
+.subtitle {
+    color: #cbd5f5;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+/* Labels */
+label {
+    display: block;
+    text-align: left;
+    font-size: 11px;
+    margin: 12px 0 6px;
+    color: #cbd5f5;
+    letter-spacing: 1px;
+}
+
+/* Inputs estilo tech */
+.input {
+    display: flex;
+    align-items: center;
+    background: rgba(15, 14, 26, 0.8);
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid rgba(96, 165, 250, 0.1);
+    transition: 0.3s;
+}
+
+.input:hover {
+    border-color: #60a5fa;
+
+}
+
+.input span {
+    margin-right: 10px;
+    color: #60a5fa;
+}
+
+.input input {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    outline: none;
+    width: 100%;
+}
+
+/* Forgot */
+.forgot {
+    text-align: right;
+    font-size: 11px;
+    margin: 10px 0;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.forgot:hover {
+    color: #60a5fa;
+}
+
+/* Botón ultra moderno */
+.btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: #1d4fd834;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 25px 0;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+
 }
