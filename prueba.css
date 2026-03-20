@@ -1,7 +1,7 @@
 body{
     margin:0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background:  #191822 100%;
     color: white;
     min-height: 100vh;
 }
@@ -14,9 +14,9 @@ body{
 
 .sidebar{
     width: 100%;
-    background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
-    padding: 15px 20px;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.774);
+    background: #121027 100%;
+    padding: 1px 20px;
+    border-bottom: #334155 solid 2px;
 }
 
 .sidebar ul{
@@ -47,9 +47,9 @@ body{
     box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
 }
 .sidebar li.active{
-    background: linear-gradient(90deg, #60a5fa, #3b82f6, #1d4ed8);
+    background:  #1d4fd834;
     transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.068);
 }
 .main{
     flex: 1;
@@ -62,16 +62,16 @@ body{
     gap: 25px;
     margin-bottom: 35px;
     flex-wrap: wrap;
+    
 }
 
 .card{
-    background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+    background: #2c2b3b7a;
     padding: 25px;
     border-radius: 20px;
     width: 220px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(96, 165, 250, 0.2);
+    border: 1px solid rgba(96, 165, 250, 0.089);
     position: relative;
     overflow: hidden;
 }
@@ -83,7 +83,7 @@ body{
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #60a5fa, #3b82f6, #1d4ed8);
+
 }
 
 .card:hover- {
@@ -96,14 +96,14 @@ body{
     font-weight: 800;
     color: #ffffff;
     margin-bottom: 8px;
-    text-shadow: 0 2px 8px rgba(96, 165, 250, 0.4);
+    text-shadow: 0 2px 8px rgba(96, 165, 250, 0.13);
 }
 
 table{
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+    background: #2c2b3bad;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0,0,0,0.4);
@@ -116,7 +116,7 @@ th, td{
 }
 
 th{
-    background: linear-gradient(90deg, #334155 0%, #475569 100%);
+    background: rgba(96, 165, 250, 0.11);
     font-weight: 700;
     color: #e2e8f0;
     text-shadow: 0 1px 2px rgba(0,0,0,0.5);
@@ -125,7 +125,7 @@ th{
 }
 
 tr:nth-child(even) {
-    background: rgba(52, 65, 85, 0.5);
+    background: rgba(52, 65, 85, 0.199);
 }
 
 tr:hover- {
