@@ -11,6 +11,32 @@ body{
     color:white;
     min-height:100vh;
 }
+
+.logo-float{
+    position: absolute;
+    top: 25px;
+    left: 30px;
+
+    width: 70px;
+    height: 70px;
+    background: #121027;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+
+    z-index: 1100;
+}
+
+.logo-float img{
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
