@@ -13,22 +13,19 @@
     <h1>INGRESO SEGURO</h1>
     <p class="subtitle">ASISTENCIA</p>
 
-    <label>USUARIO
-        <span></span>
-    </label>
+<form method="post" action="conexion.php">
+    <label>USUARIO</label>
     <div class="input">
-        <span></span>
-        <input type="text" placeholder="INGRESE SU USUARIO">
+        <input type="text" name="user" placeholder="INGRESE SU USUARIO" required>
     </div>
 
     <label>CONTRASEÑA</label>
     <div class="input">
-        <span></span>
-        <input type="password" placeholder="INGRESE SU CONTRASEÑA">
+        <input type="password" name="password" placeholder="INGRESE SU CONTRASEÑA" required>
     </div>
 
-
-    <button class="btn" onclick="location.href='prueba.html'">INICIO →</button>
+    <button type="submit" class="btn">INICIO →</button>
+</form>
 
     <button class="btn-1" onclick="location.href='inicio.html'">← VOLVER A INICIO</button>
 
