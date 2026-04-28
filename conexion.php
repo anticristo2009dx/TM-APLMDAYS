@@ -22,7 +22,12 @@ $nr = mysqli_num_rows($query);
 
 if ($nr == 1) {
     header("location: prueba.html");
+    $fila = mysqli_fetch_array($query);
+    if ($fila ['TIPO'] == 2) {
+       
+    }
+
 } else {
-    header("location: login.html");
+    header("location: login.html?error=1");
 }
-?>
+

@@ -178,3 +178,7 @@ body {
     border-top:2px solid #334155;
     margin-top:30px;
 }
+a{
+    text-decoration:none;
+    color:white;
+}
