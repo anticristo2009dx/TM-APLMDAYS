@@ -383,3 +383,41 @@ button { cursor: pointer; font-family: inherit; border: none; }
 @media (min-width: 1024px) {
   .hero { padding-top: 8rem; padding-bottom: 12rem; }
 }
+
+.hero_visual .carrusel {
+    width: 100%;
+    max-width: 500px; /* Puedes subirlo si quieres que se vea más grande */
+    margin: auto;
+    overflow: hidden;
+}
+
+/* El contenedor largo que se mueve */
+.hero_visual .carrusel .carrusel_fotos {
+    display: flex;
+    width: 400%; /* 4 imágenes de 100% cada una */
+    animation: scroll 12s infinite ease-in-out;
+}
+
+/* AQUÍ ESTÁ EL CAMBIO CLAVE */
+.hero_visual .carrusel .carrusel_fotos img {
+    width: 25%; /* CUIDADO AQUÍ: Si el contenedor mide 400%, cada foto debe medir el 25% para ser el 100% del visor */
+    height: auto;
+    flex-shrink: 0; /* Esto evita que se amontonen */
+    object-fit: cover;
+}
+
+@keyframes scroll {
+      0%, 20% { transform: translateX(0); }
+  
+  /* Transición a Imagen 2 */
+  25%, 45% { transform: translateX(-25%); }
+  
+  /* Transición a Imagen 3 */
+  50%, 70% { transform: translateX(-50%); }
+  
+  /* Transición a Imagen 1 (repetida para cerrar el ciclo) */
+  75%, 95% { transform: translateX(-75%); }
+  
+  /* Reinicio instantáneo al 0% */
+  100% { transform: translateX(0); }
+}

@@ -1,43 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
-<link rel="stylesheet" href="login.css">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>ingreso seguro</title>
+
+  <!-- Hojas de estilo -->
+  <link rel="stylesheet" href="shared1.css"/>
+  <link rel="stylesheet" href="login.css"/>
 </head>
-<body>
+<body class="login-page">
 
-<div class="container">
+  <!-- Contenedor de Login -->
+  <main class="login-container">
+
+    <!-- Encabezado -->
+    <header class="login-brand">
+
+      </div>
+      <h1>INGRESO SEGURO</h1>
+      <p>Acceso al Centro de Control Administrativo</p>
+    </header>
+
+    <!-- Tarjeta -->
+    <section class="login-card">
+      <form class="login-form" novalidate>
+
+        <!-- Campos -->
+        <div class="login-fields">
+
+          <!-- Email -->
+          <div class="field">
+            <label for="email">Correo del Administrador</label>
+            <div class="input-icon-wrap">
+              <input
+                id="email"
+                name="email"
+                type="email"
+              />
+            </div>
+          </div>
+
+          <!-- Contraseña -->
+          <div class="field">
+            <div class="field-label-row">
+              <label for="password">Contraseña Segura</label>
+            </div>
+            <div class="input-icon-wrap">
+              <input
+                id="password"
+                name="password"
+                type="password"
+              />
+              <button class="input-action" type="button" aria-label="Mostrar u ocultar contraseña">
+                <span class="material-symbols-outlined"></span>
+              </button>
+            </div>
+          </div>
+
+        </div>
 
 
-    <h1>INGRESO SEGURO</h1>
-    <p class="subtitle">ASISTENCIA</p>
 
-    <div id="error" class="error">
-        <h5>USUARIO O CONTRASEÑA INCORRECTOS</h5>
-    </div>
-    <script src="login.js"></script>
-
-<form method="post" action="conexion.php">
-    <label>USUARIO</label>
-    <div class="input">
-        <input type="text" name="user" placeholder="INGRESE SU USUARIO" required>
-    </div>
-
-    <label>CONTRASEÑA</label>
-    <div class="input">
-        <input type="password" name="password" placeholder="INGRESE SU CONTRASEÑA" required>
-    </div>
-
-    <button type="submit" class="btn">INICIO →</button>
-</form>
-
-    <button class="btn-1" onclick="location.href='inicio.html'">← VOLVER A INICIO</button>
+        <!-- Botón -->
+        <button class="login-submit" type="submit">
+          <span class="material-symbols-outlined"></span>
+          Iniciar Sesión
+        </button>
 
 
-
-</div>
-
+  </main>
 
 </body>
 </html>

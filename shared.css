@@ -1,9 +1,4 @@
-/* ============================================================
-   shared.css
-   Design tokens, reset, and components shared across all pages
-   ============================================================ */
 
-/* ── Reset ──────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

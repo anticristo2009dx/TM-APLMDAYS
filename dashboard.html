@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduMatrix Pro | General Control Panel</title>
+  <title>EduMatrix Pro | Panel de Control General</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
@@ -13,21 +13,21 @@
 
   <nav class="topnav">
     <div class="topnav__left">
-      <span class="topnav__logo">EduMatrix Pro</span>
+      <span class="topnav__logo">ingreso seguor</span>
       <div class="topnav__links">
-        <a class="topnav__link topnav__link--active" href="#">Dashboard</a>
-        <a class="topnav__link" href="#">Students</a>
-        <a class="topnav__link" href="#">Courses</a>
-        <a class="topnav__link" href="#">Faculty</a>
-        <a class="topnav__link" href="#">Analytics</a>
-        <a class="topnav__link" href="#">Financials</a>
+        <a class="topnav__link topnav__link--active" href="#">Panel</a>
+        <a class="topnav__link" href="#">Estudiantes</a>
+        <a class="topnav__link" href="#">Cursos</a>
+        <a class="topnav__link" href="#">Profesores</a>
+        <a class="topnav__link" href="#">Analíticas</a>
+        <a class="topnav__link" href="#">Finanzas</a>
       </div>
     </div>
     <div class="topnav__actions">
       <button class="topnav__icon-btn"><span class="material-symbols-outlined">notifications</span></button>
       <button class="topnav__icon-btn"><span class="material-symbols-outlined">settings</span></button>
       <div class="topnav__avatar">
-        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKLjjBMGYasXK26FrqCzxUTm-6YuKRP8Goh4bBis4IYc-PUhQcTu-2jmDOXwM0JQEln9P954qKhParCnl--0ttYbY5E1jPpAcn13LhtPhzi4RBchGBMzSZXkh1VPkvmWjCY3DGPBOHyqqOjvEGYU5i1FisPef9kl0AxwS6qvi4jLpaxnJznmJ7Za0nhqz4N1G8L0ur-8eJ1ipQDGqWnnaLA3qgmoPXbljLdVj18N3PlBaATQQExk5D-E3q5Ilz39VLrtrNLCqMxUY" alt="Administrator Profile" />
+
       </div>
     </div>
   </nav>
@@ -36,17 +36,17 @@
 
     <header class="page-header">
       <div>
-        <p class="page-header__eyebrow">Institutional Intelligence</p>
+        <p class="page-header__eyebrow">Inteligencia Institucional</p>
         <h1 class="page-header__title">Panel de Control General</h1>
       </div>
       <div class="page-header__actions">
         <button class="btn btn--outline">
           <span class="material-symbols-outlined btn__icon">download</span>
-          EXPORT REPORT
+          EXPORTAR REPORTE
         </button>
         <button class="btn btn--primary">
           <span class="material-symbols-outlined btn__icon">add</span>
-          NEW INTAKE
+          NUEVO INGRESO
         </button>
       </div>
     </header>
@@ -60,7 +60,7 @@
           <span class="kpi-card__badge kpi-card__badge--positive">+12.5%</span>
         </div>
         <div>
-          <p class="kpi-card__label">TOTAL STUDENTS</p>
+          <p class="kpi-card__label">TOTAL DE ESTUDIANTES</p>
           <p class="kpi-card__value">12,482</p>
         </div>
         <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--primary" style="width:75%"></div></div>
@@ -69,11 +69,11 @@
       <div class="kpi-card kpi-card--secondary">
         <div class="kpi-card__top">
           <div class="kpi-card__icon kpi-card__icon--secondary"><span class="material-symbols-outlined">person_celebrate</span></div>
-          <span class="kpi-card__badge kpi-card__badge--neutral">Stable</span>
+          <span class="kpi-card__badge kpi-card__badge--neutral">Estable</span>
         </div>
         <div>
-          <p class="kpi-card__label">ACTIVE FACULTY</p>
-          <p class="kpi-card__value">842</p>
+          <p class="kpi-card__label">PROFESORES ACTIVOS</p>
+          <p class="kpi-card__value">0</p>
         </div>
         <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--secondary" style="width:92%"></div></div>
       </div>
@@ -84,7 +84,7 @@
           <span class="kpi-card__badge kpi-card__badge--negative">-2.1%</span>
         </div>
         <div>
-          <p class="kpi-card__label">AVG ATTENDANCE</p>
+          <p class="kpi-card__label">ASISTENCIA PROMEDIO</p>
           <p class="kpi-card__value">94.2%</p>
         </div>
         <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--tertiary" style="width:94%"></div></div>
@@ -93,10 +93,10 @@
       <div class="kpi-card kpi-card--error">
         <div class="kpi-card__top">
           <div class="kpi-card__icon kpi-card__icon--error"><span class="material-symbols-outlined">warning</span></div>
-          <span class="kpi-card__badge kpi-card__badge--neutral">Urgent</span>
+          <span class="kpi-card__badge kpi-card__badge--neutral">Urgente</span>
         </div>
         <div>
-          <p class="kpi-card__label">PENDING ALERTS</p>
+          <p class="kpi-card__label">ALERTAS PENDIENTES</p>
           <p class="kpi-card__value">24</p>
         </div>
         <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--error" style="width:40%"></div></div>
@@ -106,161 +106,6 @@
 
     <!-- DASHBOARD GRID -->
     <div class="dashboard-grid">
-
-      <!-- Performance Chart -->
-      <div class="glass-panel panel--chart">
-        <div class="panel__header">
-          <div>
-            <h3 class="panel__title">Performance Intelligence</h3>
-            <p class="panel__subtitle">Aggregate score trends across all departments</p>
-          </div>
-          <select class="panel__select">
-            <option>Academic Year 2024</option>
-            <option>Academic Year 2023</option>
-          </select>
-        </div>
-        <div class="panel__chart-body">
-          <img src="https://lh3.googleusercontent.com/aida/ADBb0uiMSg3jpArDzBaSZwHF0WSZGnHUhNUVin6siROVIhJ_neLYW_NGo1c55KYkzVTYAom7k-6cxbu2eYjfTRifrgPhwVzMc_5h6l8AvJpMbpbySV-YThWH5O-bPYFXxcBkMmTVByCYL8oivBUrdHbVPXRFBrWv3Z1EqmJQQ4ElwujMrDKjJg9m0sx2VxITJBbFAwRT8KIa8Ue85bcdV7QBEHdn-24D9Dl07LH4RKLfhewGXMzU9wns2oQBpm_76DQvY9FAbsmg7NfH1g" alt="Academic performance chart" />
-          <div class="panel__chart-overlay"></div>
-        </div>
-      </div>
-
-      <!-- Intake Distribution -->
-      <div class="glass-panel panel--donut">
-        <div class="panel__header">
-          <div>
-            <h3 class="panel__title">Intake Distribution</h3>
-            <p class="panel__subtitle">Enrollment by Faculty</p>
-          </div>
-        </div>
-        <div class="panel__donut-body">
-          <img src="https://lh3.googleusercontent.com/aida/ADBb0ujBlXRQ3-P_CmrbHSbcZ2uoFCafXXvl_kz57hfFUP-0TZBlGEy8pzNdV13CGqFkt39nx3B6l70qOjydXzBJGRJjsnfStQU70ST3_k09illVtg-_g90LDGuvt_Q7oSjsbaFrJJhuphDzYLgkdhB5s5sww6stdbJj6XJGXsuYAgXck-psKdIahB4UI6MxVvVQWe3PqIgIuS9t55NzY-QxtmpsCrvjRQYu8x4sXeB-ffg-J4wmxud8sngfBNviFlpon8qGap8KJ5XG9g" alt="Enrollment donut chart" />
-          <div class="donut-legend">
-            <div class="donut-legend__row">
-              <span class="donut-legend__name"><span class="donut-legend__dot donut-legend__dot--primary"></span>Engineering</span>
-              <span class="donut-legend__pct">34%</span>
-            </div>
-            <div class="donut-legend__row">
-              <span class="donut-legend__name"><span class="donut-legend__dot donut-legend__dot--secondary"></span>Business</span>
-              <span class="donut-legend__pct">28%</span>
-            </div>
-            <div class="donut-legend__row">
-              <span class="donut-legend__name"><span class="donut-legend__dot donut-legend__dot--tertiary"></span>Humanities</span>
-              <span class="donut-legend__pct">22%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Course Table -->
-      <div class="glass-panel panel--table">
-        <div class="panel__header">
-          <div>
-            <h3 class="panel__title">Course Portfolio Status</h3>
-            <p class="panel__subtitle">Active curriculum oversight</p>
-          </div>
-          <button class="panel__link-btn">VIEW ALL COURSES <span class="material-symbols-outlined">arrow_forward</span></button>
-        </div>
-        <div class="table-scroll">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>COURSE NAME</th>
-                <th>FACULTY</th>
-                <th>CAPACITY</th>
-                <th>PROGRESS</th>
-                <th>STATUS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="course-cell">
-                    <div class="course-cell__icon course-cell__icon--primary"><span class="material-symbols-outlined">terminal</span></div>
-                    <div>
-                      <p class="course-cell__name">Advanced Algorithms</p>
-                      <p class="course-cell__code">CS-401</p>
-                    </div>
-                  </div>
-                </td>
-                <td>Engineering</td>
-                <td>112/120</td>
-                <td>
-                  <div class="progress-cell">
-                    <div class="progress-bar"><div class="progress-bar__fill progress-bar__fill--secondary" style="width:100%"></div></div>
-                    <span class="progress-cell__label">100%</span>
-                  </div>
-                </td>
-                <td><span class="badge badge--secondary">Finalizing</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="course-cell">
-                    <div class="course-cell__icon course-cell__icon--tertiary"><span class="material-symbols-outlined">payments</span></div>
-                    <div>
-                      <p class="course-cell__name">Global Macroeconomics</p>
-                      <p class="course-cell__code">ECON-205</p>
-                    </div>
-                  </div>
-                </td>
-                <td>Business</td>
-                <td>88/90</td>
-                <td>
-                  <div class="progress-cell">
-                    <div class="progress-bar"><div class="progress-bar__fill progress-bar__fill--primary" style="width:65%"></div></div>
-                    <span class="progress-cell__label">65%</span>
-                  </div>
-                </td>
-                <td><span class="badge badge--primary">Active</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Upcoming Events -->
-      <div class="glass-panel panel--events">
-        <h3 class="panel__title--standalone">Upcoming Events</h3>
-        <div class="events-list">
-          <div class="event-item event-item--bordered">
-            <div class="event-item__date">
-              <p class="event-item__month">OCT</p>
-              <p class="event-item__day">24</p>
-            </div>
-            <div>
-              <p class="event-item__name">Faculty Strategy Session</p>
-              <p class="event-item__meta">Auditorium A • 09:00 AM</p>
-            </div>
-          </div>
-          <div class="event-item">
-            <div class="event-item__date">
-              <p class="event-item__month">OCT</p>
-              <p class="event-item__day">27</p>
-            </div>
-            <div>
-              <p class="event-item__name">Q3 Financial Audit</p>
-              <p class="event-item__meta">Boardroom B • 11:30 AM</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Campus Banner -->
-      <div class="glass-panel panel--campus">
-        <img src="https://lh3.googleusercontent.com/aida/ADBb0ujs7R1Ok7H5RrY1WIFPvlhNBsnbtbLgq5jcU5IBK073xaNp61vD1FJWNCOMnxFWzgh_H0O6cawW-72bLEyyN4SZjrLh5X2qY1ZH2Q53YGV0wgwCp1HziP_HiNd5Tgmy3lGf9uhHoi_IBKIWHejP-VdmUCen6znF6jeUvG329HwgH0zDpoFsIvRr3_VYjBE5OmvrJb4G-T-QCN8bSkgUKXbUnGk_nFspE6I6xUGBBnyOb_Clq4M0jgciBxF5Q4j6Khqcrpzjodr6" alt="Campus aerial view" class="campus-img" />
-        <div class="campus-overlay">
-          <div class="campus-content">
-            <h2 class="campus-content__title">Campus Capacity</h2>
-            <p class="campus-content__desc">Real-time occupancy monitoring across 42 lecture halls and 12 laboratories.</p>
-            <button class="btn btn--ghost">VIEW LIVE HEATMAP</button>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </main>
-
-  <button class="fab"><span class="material-symbols-outlined">auto_awesome</span></button>
-
 </body>
 </html>
