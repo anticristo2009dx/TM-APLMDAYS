@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>estudiantes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="students.css" />
+</head>
+<body>
+
+  <header class="topnav">
+    <div class="topnav__left">
+      <span class="topnav__logo">Ingreso Seguro</span>
+      <nav class="topnav__links">
+        <a class="topnav__link" href="#">inicio</a>
+        <a class="topnav__link topnav__link--active" href="#">reportes</a>
+        <a class="topnav__link" href="#">configuraciom</a>
+        <a class="topnav__link" href="#">panel de control</a>
+        <a class="topnav__link" href="#">cerrar sesion</a>
+      </nav>
+    </div>
+    <div class="topnav__actions">
+      <button class="topnav__icon-btn"><span class="material-symbols-outlined">notifications</span></button>
+      <button class="topnav__icon-btn"><span class="material-symbols-outlined">settings</span></button>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-header__title">Estudiantes</h1>
+        <p class="page-header__desc">Gestion de ingreso seguro de los estudiante y asistencia</p>
+      </div>
+      <div class="page-header__actions">
+        <button class="btn btn--outline">
+          <span class="material-symbols-outlined btn__icon">filter_list</span>
+          FILTROS
+        </button>
+        <button class="btn btn--primary">
+          <span class="material-symbols-outlined btn__icon">person_add</span>
+          AGREGAR ESTUDIANTE
+        </button>
+      </div>
+    </div>
+
+    <!-- ESTADÍSTICAS RÁPIDAS -->
+    <div class="stats-grid">
+      <div class="stat-card glass-card">
+        <div class="stat-card__icon stat-card__icon--primary"><span class="material-symbols-outlined">group</span></div>
+        <div><p class="stat-card__label">TOTAL ESTUDIANTES</p><p class="stat-card__value">0</p></div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-card__icon stat-card__icon--secondary"><span class="material-symbols-outlined">trending_up</span></div>
+        <div><p class="stat-card__label">ASISTENCIA</p><p class="stat-card__value">0%</p></div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-card__icon stat-card__icon--tertiary"><span class="material-symbols-outlined">school</span></div>
+        <div><p class="stat-card__label">EN LISTA DEL DIRECTOR</p><p class="stat-card__value">0</p></div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-card__icon stat-card__icon--error"><span class="material-symbols-outlined">warning</span></div>
+        <div><p class="stat-card__label">EN RIESGO</p><p class="stat-card__value">0</p></div>
+      </div>
+    </div>
+
+    <!-- TABLA DEL DIRECTORIO -->
+    <div class="glass-card dir-table-wrap">
+      <div class="table-scroll">
+        <table class="dir-table">
+          <thead>
+            <tr>
+              <th>Estudiante</th>
+              <th>Código de estudiante</th>
+              <th>Carrera</th>
+              <th>Estado</th>
+              <th>Progresión de GPA</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td>
+                <div class="student-cell">
+                  <div><p class="student-cell__name">---</p><p class="student-cell__email"></p></div>
+                </div>
+              </td>
+              <td class="cell--muted">#2024-8842</td>
+              <td>-----</td>
+              <td><span class="badge badge--secondary">Activo</span></td>
+              <td><div class="gpa-cell"><div class="gpa-bar">
+              <td><button class="action-btn material-symbols-outlined">more_vert</button></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="student-cell">
+                <div><p class="student-cell__name">---</p><p class="student-cell__email"></p></div>
+                </div>
+              </td>
+              <td class="cell--muted">#2024-1105</td>
+              <td>---</td>
+              <td><span class="badge badge--tertiary">Probatoria</span></td>
+              <td><div class="gpa-cell"><div class="gpa-bar">
+              <td><button class="action-btn material-symbols-outlined">more_vert</button></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="student-cell">
+                 
+                  <div><p class="student-cell__name">---</p>
+                </div>
+              </td>
+              <td class="cell--muted">#2024-9221</td>
+              <td>---</td>
+              <td><span class="badge badge--secondary">Activo</span></td>
+              <td><div class="gpa-cell"><div class="gpa-bar">
+              <td><button class="action-btn material-symbols-outlined">more_vert</button></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="student-cell">
+                
+                  <div><p class="student-cell__name">---</p><p class="student-cell__email"></p></div>
+                </div>
+              </td>
+              <td class="cell--muted">#2024-4412</td>
+              <td>---</td>
+              <td><span class="badge badge--error">Suspendida</span></td>
+              <td><div class="gpa-cell"><div class="gpa-bar">
+              <td><button class="action-btn material-symbols-outlined">more_vert</button></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

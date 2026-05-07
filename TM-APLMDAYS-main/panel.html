@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>panel de control</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="panel.css" />
+</head>
+<body>
+
+
+  <nav class="topnav">
+    <div class="topnav__left">
+      <span class="topnav__logo">Ingreso Seguro</span>
+      <div class="topnav__links">
+        <a class="topnav__link" href="#">inicio</a>
+        <a class="topnav__link" href="#">reportes</a>
+        <a class="topnav__link" href="#">configuraciom</a>
+        <a class="topnav__link topnav__link--active" href="#">panel de control</a>
+        <a class="topnav__link" href="#">cerrar sesion</a>
+      </div>
+    </div>
+    <div class="topnav__actions">
+      <button class="topnav__icon-btn"><span class="material-symbols-outlined">notifications</span></button>
+      <button class="topnav__icon-btn"><span class="material-symbols-outlined">settings</span></button>
+      <div class="topnav__avatar">
+      </div>
+    </div>
+  </nav>
+
+
+  <main class="main-content">
+
+
+    <header class="page-header">
+      <div>
+        <p class="page-header__eyebrow">asistencia moderna</p>
+        <h1 class="page-header__title">Panel de Control General</h1>
+      </div>
+      <div class="page-header__actions">
+        <button class="btn btn--outline">
+          <span class="material-symbols-outlined btn__icon">download</span>
+          EXPORTAR REPORTE
+        </button>
+      </div>
+    </header>
+
+
+    <!-- GRILLA DE KPIS -->
+    <div class="kpi-grid">
+
+
+      <div class="kpi-card kpi-card--primary">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--primary"><span class="material-symbols-outlined">school</span></div>
+          <span class="kpi-card__badge kpi-card__badge--positive">0%</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">TOTAL ESTUDIANTES</p>
+          <p class="kpi-card__value">0</p>
+        </div>
+        <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--primary" style="width:75%"></div></div>
+      </div>
+
+
+      <div class="kpi-card kpi-card--secondary">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--secondary"><span class="material-symbols-outlined">person_celebrate</span></div>
+          <span class="kpi-card__badge kpi-card__badge--neutral">Estable</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">DOCENCIA ACTIVA</p>
+          <p class="kpi-card__value">0</p>
+        </div>
+        <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--secondary" style="width:92%"></div></div>
+      </div>
+
+
+      <div class="kpi-card kpi-card--tertiary">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--tertiary"><span class="material-symbols-outlined">event_available</span></div>
+          <span class="kpi-card__badge kpi-card__badge--negative">0%</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">ASISTENCIA PROMEDIO</p>
+          <p class="kpi-card__value">0</p>
+        </div>
+        <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--tertiary" style="width:94%"></div></div>
+      </div>
+
+
+      <div class="kpi-card kpi-card--error">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--error"><span class="material-symbols-outlined">warning</span></div>
+          <span class="kpi-card__badge kpi-card__badge--neutral">Urgente</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">ALERTAS PENDIENTES</p>
+          <p class="kpi-card__value">0</p>
+        </div>
+        <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--error" style="width:40%"></div></div>
+      </div>
+
+
+    </div>
+
+
+    <!-- GRILLA DE DASHBOARD -->
+    <div class="dashboard-grid">
+
+
+
+      <!-- Tabla de cursos -->
+      <div class="glass-panel panel--table">
+        <div class="panel__header">
+          <div>
+            <h3 class="panel__title">Estado del Portafolio de Cursos</h3>
+            <p class="panel__subtitle">Supervisión activa del currículo</p>
+          </div>
+          <button class="panel__link-btn">VER TODOS LOS CURSOS <span class="material-symbols-outlined">arrow_forward</span></button>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>NOMBRE DEL CURSO</th>
+                <th>DOCENCIA</th>
+                <th>CAPACIDAD</th>
+                <th>PROGRESO</th>
+                <th>ESTADO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="course-cell">
+                    <div class="course-cell__icon course-cell__icon--primary"><span class="material-symbols-outlined">terminal</span></div>
+                    <div>
+                      <p class="course-cell__name">Algoritmos Avanzados</p>
+                      <p class="course-cell__code">CS-401</p>
+                    </div>
+                  </div>
+                </td>
+                <td>Ingeniería</td>
+                <td>112/120</td>
+                <td>
+                  <div class="progress-cell">
+                    <div class="progress-bar"><div class="progress-bar__fill progress-bar__fill--secondary" style="width:100%"></div></div>
+                    <span class="progress-cell__label">100%</span>
+                  </div>
+                </td>
+                <td><span class="badge badge--secondary">Finalizando</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="course-cell">
+                    <div class="course-cell__icon course-cell__icon--tertiary"><span class="material-symbols-outlined">payments</span></div>
+                    <div>
+                      <p class="course-cell__name">Macroeconomía Global</p>
+                      <p class="course-cell__code">ECON-205</p>
+                    </div>
+                  </div>
+                </td>
+                <td>Negocios</td>
+                <td>88/90</td>
+                <td>
+                  <div class="progress-cell">
+                    <div class="progress-bar"><div class="progress-bar__fill progress-bar__fill--primary" style="width:65%"></div></div>
+                    <span class="progress-cell__label">65%</span>
+                  </div>
+                </td>
+                <td><span class="badge badge--primary">Activo</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- Próximos eventos -->
+      <div class="glass-panel panel--events">
+        <h3 class="panel__title--standalone">Próximos eventos</h3>
+        <div class="events-list">
+          <div class="event-item event-item--bordered">
+            <div class="event-item__date">
+              <p class="event-item__month">OCT</p>
+              <p class="event-item__day">24</p>
+            </div>
+            <div>
+              <p class="event-item__name">Sesión estratégica docente</p>
+              <p class="event-item__meta">Auditorio A • 09:00 AM</p>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-item__date">
+              <p class="event-item__month">OCT</p>
+              <p class="event-item__day">27</p>
+            </div>
+            <div>
+              <p class="event-item__name">Auditoría financiera Q3</p>
+              <p class="event-item__meta">Sala de juntas B • 11:30 AM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+
+
+
+
+</body>
+</html>
