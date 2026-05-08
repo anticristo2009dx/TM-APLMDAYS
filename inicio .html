@@ -6,10 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ingreso seguro</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="inicio.css" />
 </head>
@@ -65,23 +63,55 @@
             </div>
           </div>
 
+          <!-- CARRUSEL -->
           <div class="hero__visual">
             <div class="hero__glow"></div>
-            <div class="carrusel">
-              <div class="carrusel_fotos">
-                <img src="img_1.jpg" alt="img1">
-                <img src="img_2.jpg" alt="img2">
-                <img src="img_3.jpg" alt="img3">
-                <img src="img_1.jpg" alt="img1">
+
+            <div class="carrusel" id="carrusel">
+
+              <!-- Flechas -->
+              <button class="carrusel__btn carrusel__btn--prev" id="btnPrev" aria-label="Anterior">
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <button class="carrusel__btn carrusel__btn--next" id="btnNext" aria-label="Siguiente">
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+
+              <!-- Pista de imágenes -->
+              <div class="carrusel__track" id="carruselTrack">
+                <div class="carrusel__slide">
+                  <img src="img_1.jpg" alt="Imagen 1" />
+                </div>
+                <div class="carrusel__slide">
+                  <img src="img_2.jpg" alt="Imagen 2" />
+                </div>
+                <div class="carrusel__slide">
+                  <img src="img_3.jpg" alt="Imagen 3" />
+                </div>
+                <div class="carrusel__slide">
+                  <img src="img_1.jpg" alt="Imagen 1" />
+                </div>
               </div>
+
+              <!-- Puntos indicadores -->
+              <div class="carrusel__dots" id="carruselDots">
+                <button class="carrusel__dot carrusel__dot--active" data-index="0" aria-label="Slide 1"></button>
+                <button class="carrusel__dot" data-index="1" aria-label="Slide 2"></button>
+                <button class="carrusel__dot" data-index="2" aria-label="Slide 3"></button>
+                <button class="carrusel__dot" data-index="3" aria-label="Slide 4"></button>
+              </div>
+
+              <!-- Contador -->
+              <div class="carrusel__counter">
+                <span id="carruselCurrent">1</span> / <span id="carruselTotal">4</span>
+              </div>
+
             </div>
           </div>
 
         </div>
       </div>
     </section>
-
-
 
     <!-- ESTADÍSTICAS -->
     <section class="stats">
@@ -94,9 +124,18 @@
               Gestionamos mejor la seguridad del colegio mediante Qrs
             </p>
             <ul class="stats__list">
-              <li><span class="material-symbols-outlined icon">check_circle</span><span>Mejora de seguridad</span></li>
-              <li><span class="material-symbols-outlined icon">check_circle</span><span>Asistencia rapida</span></li>
-              <li><span class="material-symbols-outlined icon">check_circle</span><span>Cumplimiento total</span></li>
+              <li>
+                <span class="material-symbols-outlined icon">check_circle</span>
+                <span>Mejora de seguridad</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined icon">check_circle</span>
+                <span>Asistencia rapida</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined icon">check_circle</span>
+                <span>Cumplimiento total</span>
+              </li>
             </ul>
           </div>
 
@@ -124,23 +163,88 @@
       </div>
     </section>
 
+  </main>
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      <div class="site-footer__inner">
-        <div class="site-footer__brand">
-          <div class="site-footer__name">Igreso seguro</div>
-          <div class="site-footer__copy">© 2026</div>
-        </div>
-        <div class="site-footer__links">
-          <a href="#">Privacidad</a>
-          <a href="#">Términos</a>
-          <a href="#">Cookies</a>
-          <a href="#">Contacto</a>
-        </div>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <div class="site-footer__name">Ingreso seguro</div>
+        <div class="site-footer__copy">© 2026</div>
       </div>
-    </footer>
+      <div class="site-footer__links">
+        <a href="#">Privacidad</a>
+        <a href="#">Términos</a>
+        <a href="#">Cookies</a>
+        <a href="#">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DEL CARRUSEL -->
+  <script>
+    const track    = document.getElementById('carruselTrack');
+    const dots     = document.querySelectorAll('.carrusel__dot');
+    const btnPrev  = document.getElementById('btnPrev');
+    const btnNext  = document.getElementById('btnNext');
+    const current  = document.getElementById('carruselCurrent');
+    const total    = document.getElementById('carruselTotal');
+
+    const TOTAL    = dots.length;
+    let index      = 0;
+    let timer      = null;
+
+    total.textContent = TOTAL;
+
+    function goTo(i) {
+      // Loop infinito
+      index = (i + TOTAL) % TOTAL;
+
+      track.style.transform = `translateX(-${index * 100}%)`;
+
+      // Actualiza puntos
+      dots.forEach((d, n) => d.classList.toggle('carrusel__dot--active', n === index));
+
+      // Actualiza contador
+      current.textContent = index + 1;
+    }
+
+    function startAuto() {
+      timer = setInterval(() => goTo(index + 1), 4000);
+    }
+
+    function resetAuto() {
+      clearInterval(timer);
+      startAuto();
+    }
+
+    // Flechas
+    btnPrev.addEventListener('click', () => { goTo(index - 1); resetAuto(); });
+    btnNext.addEventListener('click', () => { goTo(index + 1); resetAuto(); });
+
+    // Puntos
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goTo(Number(dot.dataset.index));
+        resetAuto();
+      });
+    });
+
+    // Swipe táctil
+    let startX = 0;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+    track.addEventListener('touchend',   e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) { goTo(diff > 0 ? index + 1 : index - 1); resetAuto(); }
+    });
+
+    // Pausa al hacer hover
+    document.getElementById('carrusel').addEventListener('mouseenter', () => clearInterval(timer));
+    document.getElementById('carrusel').addEventListener('mouseleave', startAuto);
+
+    // Arranca
+    startAuto();
+  </script>
 
 </body>
-
 </html>

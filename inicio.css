@@ -391,33 +391,148 @@ button { cursor: pointer; font-family: inherit; border: none; }
     overflow: hidden;
 }
 
-/* El contenedor largo que se mueve */
-.hero_visual .carrusel .carrusel_fotos {
-    display: flex;
-    width: 400%; /* 4 imágenes de 100% cada una */
-    animation: scroll 12s infinite ease-in-out;
+/* ============================================================
+   CARRUSEL
+   ============================================================ */
+
+.carrusel {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(173, 198, 255, 0.1);
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  aspect-ratio: 4 / 3;   /* proporción estable antes de cargar imágenes */
 }
 
-/* AQUÍ ESTÁ EL CAMBIO CLAVE */
-.hero_visual .carrusel .carrusel_fotos img {
-    width: 25%; /* CUIDADO AQUÍ: Si el contenedor mide 400%, cada foto debe medir el 25% para ser el 100% del visor */
-    height: auto;
-    flex-shrink: 0; /* Esto evita que se amontonen */
-    object-fit: cover;
+/* ── Pista de slides ────────────────────────────────────────── */
+.carrusel__track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.18, 1);
 }
 
-@keyframes scroll {
-      0%, 20% { transform: translateX(0); }
-  
-  /* Transición a Imagen 2 */
-  25%, 45% { transform: translateX(-25%); }
-  
-  /* Transición a Imagen 3 */
-  50%, 70% { transform: translateX(-50%); }
-  
-  /* Transición a Imagen 1 (repetida para cerrar el ciclo) */
-  75%, 95% { transform: translateX(-75%); }
-  
-  /* Reinicio instantáneo al 0% */
-  100% { transform: translateX(0); }
+.carrusel__slide {
+  min-width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carrusel__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Suave zoom al estar activo — opcional */
+  transition: transform 6s ease;
+}
+
+/* ── Flechas ────────────────────────────────────────────────── */
+.carrusel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 19, 38, 0.55);
+  border: 1px solid rgba(173, 198, 255, 0.2);
+  color: var(--primary);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, border-color 0.2s;
+  backdrop-filter: blur(6px);
+}
+.carrusel__btn:hover {
+  background: rgba(77, 142, 255, 0.25);
+  border-color: rgba(173, 198, 255, 0.5);
+  transform: translateY(-50%) scale(1.1);
+}
+.carrusel__btn:active { transform: translateY(-50%) scale(0.95); }
+
+.carrusel__btn--prev { left:  0.75rem; }
+.carrusel__btn--next { right: 0.75rem; }
+
+/* ── Puntos indicadores ─────────────────────────────────────── */
+.carrusel__dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.carrusel__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s, width 0.25s, transform 0.2s;
+  padding: 0;
+}
+.carrusel__dot:hover { background: rgba(255, 255, 255, 0.6); }
+.carrusel__dot--active {
+  width: 1.5rem;                          /* punto activo se alarga */
+  background: var(--primary);
+}
+
+/* ── Contador (ej: 1 / 4) ───────────────────────────────────── */
+.carrusel__counter {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.875rem;
+  z-index: 20;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(11, 19, 38, 0.5);
+  backdrop-filter: blur(4px);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ── Gradiente inferior sobre la imagen ─────────────────────── */
+.carrusel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(11, 19, 38, 0.45) 0%,
+    transparent 40%
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .site-header__nav { display: flex; }
+  .hero__grid { grid-template-columns: repeat(12, 1fr); }
+  .hero__text   { grid-column: span 6; }
+  .hero__visual { grid-column: span 6; }
+  .features__grid { grid-template-columns: repeat(3, 1fr); }
+  .stats__inner   { flex-direction: row; }
+  .stats__text    { width: 50%; }
+  .stats__metrics { width: 50%; }
+  .cta-box__buttons { flex-direction: row; }
+  .site-footer__inner { flex-direction: row; }
+}
+
+@media (min-width: 1024px) {
+  .hero { padding-top: 8rem; padding-bottom: 12rem; }
 }
