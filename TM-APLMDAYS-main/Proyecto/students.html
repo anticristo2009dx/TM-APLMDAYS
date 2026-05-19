@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>ingreso seguro</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="shared.css"/>
+  <link rel="stylesheet" href="students.css"/>
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <a class="brand" href="#">INGRESO SEGURO</a>
+      <nav>
+        <a href="#">Inicio</a>
+        <a class="active" href="#">Estudiantes</a>
+        <a href="#">Alertas</a>
+        <a href="#">Reportes</a>
+        <a href="#">Configuración</a>
+        <a href="#">Cerrar Sesion</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── Encabezado de la página ───────────────────────── -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Estudiantes</h1>
+        <p class="page-subtitle">Gestion del ingreso seguro de los estudiantes.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-outline">
+          <span class="material-symbols-outlined">filter_list</span>
+          Filtros
+        </button>
+        <button class="btn btn-primary">
+          <span class="material-symbols-outlined">person_add</span>
+          Agregar Estudiante
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Estadísticas rápidas ────────────────────────── -->
+    <div class="stats-grid">
+
+      <div class="glass-card stat-card">
+        <div class="stat-icon primary">
+          <span class="material-symbols-outlined">group</span>
+        </div>
+        <div>
+          <p class="stat-label">Total de Estudiantes</p>
+          <p class="stat-value">0</p>
+        </div>
+      </div>
+
+      <div class="glass-card stat-card">
+        <div class="stat-icon secondary">
+          <span class="material-symbols-outlined">trending_up</span>
+        </div>
+        <div>
+          <p class="stat-label">Asistencia Promedio</p>
+          <p class="stat-value">0%</p>
+        </div>
+      </div>
+
+      <div class="glass-card stat-card">
+        <div class="stat-icon tertiary">
+          <span class="material-symbols-outlined">school</span>
+        </div>
+        <div>
+          <p class="stat-label">En Lista de Honor</p>
+          <p class="stat-value">0</p>
+        </div>
+      </div>
+
+      <div class="glass-card stat-card">
+        <div class="stat-icon error">
+          <span class="material-symbols-outlined">warning</span>
+        </div>
+        <div>
+          <p class="stat-label">En Riesgo</p>
+          <p class="stat-value">0</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Tabla del directorio ───────────────────────────────────── -->
+    <div class="glass-card table-wrapper">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Estudiante</th>
+              <th>ID Estudiante</th>
+              <th>Carrera</th>
+              <th>Estado</th>
+              <th>Progreso del Promedio</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- Row 1 -->
+            <tr>
+              <td>...</td>
+              <td class="td-id">#2024-8842</td>
+              <td class="td-major">ninguna</td>
+              <td><span class="badge badge-active">Activo</span></td>
+              <td>...</td>
+              <td>...</td>
+            </tr>
+
+            <!-- Row 2 -->
+            <tr>
+              <td>...</td>
+              <td class="td-id">#2024-1105</td>
+              <td class="td-major">ninguna</td>
+              <td><span class="badge badge-probation">En Prueba</span></td>
+              <td>...</td>
+              <td>...</td>
+            </tr>
+
+            <!-- Row 3 -->
+            <tr>
+              <td>...</td>
+              <td class="td-id">#2024-9221</td>
+              <td class="td-major">ninguna</td>
+              <td><span class="badge badge-active">Activo</span></td>
+              <td>...</td>
+              <td>...</td>
+            </tr>
+
+            <!-- Row 4 -->
+            <tr>
+              <td>...</td>
+              <td class="td-id">#2024-4412</td>
+              <td class="td-major">ninguna</td>
+              <td><span class="badge badge-suspended">Suspendido</span></td>
+              <td>...</td>
+              <td>...</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+  </main>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>inicio</title>
+  <title>Ingreso seguro</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
@@ -20,8 +20,10 @@
       <div class="site-header__logo">INGRESO SEGURO</div>
 
       <nav class="site-header__nav">
-        <a class="active" href="#">inicio</a>
-        <a href="#">reportes</a>
+        <a href="#">Inicio</a>
+        <a href="#">Estudiante</a>
+        <a href="#">Alertas</a>
+        <a href="#">Reportes</a>
         <a href="#">Configuración</a>
         <a href="#">Cerrar Sesión</a>
       </nav>
@@ -61,31 +63,55 @@
             </div>
           </div>
 
+          <!-- CARRUSEL -->
           <div class="hero__visual">
             <div class="hero__glow"></div>
-            <div class="hero__panel">
-              <img
-                src="https://lh3.googleusercontent.com/aida/ADBb0ugVjCWUhTP0FSGmzkQKuaGVREqdw4wsMHBf1XXpo8AWSkad0c56AThhQV4epXrDkFSd_8D3mvQ_XQgSX9XKpvzXeJyp5jEKF4kI5o9bdbjftd7jK9IyXRVRe0NR5MlHmmb8yaIHe98gxoqhPgVogrUBDT7de1xBJth9Ysat81AZIH3W1gHVHbTuEZvFwoV4loepp9-r1lkwrEmRUMin_MdTIIXr8K9qwv5foG1n1YUud_tsNhGDzwUmnfCyre1xMGEbSYoGGBfO"
-                alt="Panel educativo"
-              />
-              <div class="hero__metric-card">
-                <div class="hero__metric-card__header">
-                  <div class="hero__metric-card__icon">
-                    <span class="material-symbols-outlined">trending_up</span>
-                  </div>
-                  <span class="hero__metric-card__label">Crecimiento</span>
+
+            <div class="carrusel" id="carrusel">
+
+              <!-- Flechas -->
+              <button class="carrusel__btn carrusel__btn--prev" id="btnPrev" aria-label="Anterior">
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <button class="carrusel__btn carrusel__btn--next" id="btnNext" aria-label="Siguiente">
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+
+              <!-- Pista de imágenes -->
+              <div class="carrusel__track" id="carruselTrack">
+                <div class="carrusel__slide">
+                  <img src="img_1.jpg" alt="Imagen 1" />
                 </div>
-                <div class="hero__metric-card__value">+12.4%</div>
-                <div class="hero__metric-card__sub">Seguimiento en tiempo real activo</div>
+                <div class="carrusel__slide">
+                  <img src="img_2.jpg" alt="Imagen 2" />
+                </div>
+                <div class="carrusel__slide">
+                  <img src="img_3.jpg" alt="Imagen 3" />
+                </div>
+                <div class="carrusel__slide">
+                  <img src="img_1.jpg" alt="Imagen 1" />
+                </div>
               </div>
+
+              <!-- Puntos indicadores -->
+              <div class="carrusel__dots" id="carruselDots">
+                <button class="carrusel__dot carrusel__dot--active" data-index="0" aria-label="Slide 1"></button>
+                <button class="carrusel__dot" data-index="1" aria-label="Slide 2"></button>
+                <button class="carrusel__dot" data-index="2" aria-label="Slide 3"></button>
+                <button class="carrusel__dot" data-index="3" aria-label="Slide 4"></button>
+              </div>
+
+              <!-- Contador -->
+              <div class="carrusel__counter">
+                <span id="carruselCurrent">1</span> / <span id="carruselTotal">4</span>
+              </div>
+
             </div>
           </div>
 
         </div>
       </div>
     </section>
-
-
 
     <!-- ESTADÍSTICAS -->
     <section class="stats">
@@ -98,9 +124,18 @@
               Gestionamos mejor la seguridad del colegio mediante Qrs
             </p>
             <ul class="stats__list">
-              <li><span class="material-symbols-outlined icon">check_circle</span><span>Mejora de seguridad</span></li>
-              <li><span class="material-symbols-outlined icon">check_circle</span><span>Asistencia rapida</span></li>
-              <li><span class="material-symbols-outlined icon">check_circle</span><span>Cumplimiento total</span></li>
+              <li>
+                <span class="material-symbols-outlined icon">check_circle</span>
+                <span>Mejora de seguridad</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined icon">check_circle</span>
+                <span>Asistencia rapida</span>
+              </li>
+              <li>
+                <span class="material-symbols-outlined icon">check_circle</span>
+                <span>Cumplimiento total</span>
+              </li>
             </ul>
           </div>
 
@@ -128,12 +163,13 @@
       </div>
     </section>
 
+  </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="site-footer__inner">
       <div class="site-footer__brand">
-        <div class="site-footer__name">Igreso seguro</div>
+        <div class="site-footer__name">Ingreso seguro</div>
         <div class="site-footer__copy">© 2026</div>
       </div>
       <div class="site-footer__links">
@@ -144,6 +180,71 @@
       </div>
     </div>
   </footer>
+
+  <!-- SCRIPT DEL CARRUSEL -->
+  <script>
+    const track    = document.getElementById('carruselTrack');
+    const dots     = document.querySelectorAll('.carrusel__dot');
+    const btnPrev  = document.getElementById('btnPrev');
+    const btnNext  = document.getElementById('btnNext');
+    const current  = document.getElementById('carruselCurrent');
+    const total    = document.getElementById('carruselTotal');
+
+    const TOTAL    = dots.length;
+    let index      = 0;
+    let timer      = null;
+
+    total.textContent = TOTAL;
+
+    function goTo(i) {
+      // Loop infinito
+      index = (i + TOTAL) % TOTAL;
+
+      track.style.transform = `translateX(-${index * 100}%)`;
+
+      // Actualiza puntos
+      dots.forEach((d, n) => d.classList.toggle('carrusel__dot--active', n === index));
+
+      // Actualiza contador
+      current.textContent = index + 1;
+    }
+
+    function startAuto() {
+      timer = setInterval(() => goTo(index + 1), 4000);
+    }
+
+    function resetAuto() {
+      clearInterval(timer);
+      startAuto();
+    }
+
+    // Flechas
+    btnPrev.addEventListener('click', () => { goTo(index - 1); resetAuto(); });
+    btnNext.addEventListener('click', () => { goTo(index + 1); resetAuto(); });
+
+    // Puntos
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goTo(Number(dot.dataset.index));
+        resetAuto();
+      });
+    });
+
+    // Swipe táctil
+    let startX = 0;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+    track.addEventListener('touchend',   e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) { goTo(diff > 0 ? index + 1 : index - 1); resetAuto(); }
+    });
+
+    // Pausa al hacer hover
+    document.getElementById('carrusel').addEventListener('mouseenter', () => clearInterval(timer));
+    document.getElementById('carrusel').addEventListener('mouseleave', startAuto);
+
+    // Arranca
+    startAuto();
+  </script>
 
 </body>
 </html>
