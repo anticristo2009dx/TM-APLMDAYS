@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduMatrix Pro | Panel de Control General</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <nav class="topnav">
+    <div class="topnav__left">
+      <span class="topnav__logo">ingreso seguor</span>
+      <div class="topnav__links">
+        <a class="topnav__link topnav__link--active" href="#">Panel</a>
+        <a class="topnav__link" href="#">Estudiantes</a>
+        <a class="topnav__link" href="#">Cursos</a>
+        <a class="topnav__link" href="#">Profesores</a>
+        <a class="topnav__link" href="#">Analíticas</a>
+        <a class="topnav__link" href="#">Finanzas</a>
+      </div>
+    </div>
+    <div class="topnav__actions">
+      <button class="topnav__icon-btn"><span class="material-symbols-outlined">notifications</span></button>
+      <button class="topnav__icon-btn"><span class="material-symbols-outlined">settings</span></button>
+      <div class="topnav__avatar">
+
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+
+    <header class="page-header">
+      <div>
+        <p class="page-header__eyebrow">Inteligencia Institucional</p>
+        <h1 class="page-header__title">Panel de Control General</h1>
+      </div>
+      <div class="page-header__actions">
+        <button class="btn btn--outline">
+          <span class="material-symbols-outlined btn__icon">download</span>
+          EXPORTAR REPORTE
+        </button>
+        <button class="btn btn--primary">
+          <span class="material-symbols-outlined btn__icon">add</span>
+          NUEVO INGRESO
+        </button>
+      </div>
+    </header>
+
+    <!-- KPI GRID -->
+    <div class="kpi-grid">
+
+      <div class="kpi-card kpi-card--primary">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--primary"><span class="material-symbols-outlined">school</span></div>
+          <span class="kpi-card__badge kpi-card__badge--positive">+12.5%</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">TOTAL DE ESTUDIANTES</p>
+          <p class="kpi-card__value">12,482</p>
+        </div>
+        <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--primary" style="width:75%"></div></div>
+      </div>
+
+      <div class="kpi-card kpi-card--secondary">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--secondary"><span class="material-symbols-outlined">person_celebrate</span></div>
+          <span class="kpi-card__badge kpi-card__badge--neutral">Estable</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">PROFESORES ACTIVOS</p>
+          <p class="kpi-card__value">0</p>
+        </div>
+        <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--secondary" style="width:92%"></div></div>
+      </div>
+
+      <div class="kpi-card kpi-card--tertiary">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--tertiary"><span class="material-symbols-outlined">event_available</span></div>
+          <span class="kpi-card__badge kpi-card__badge--negative">-2.1%</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">ASISTENCIA PROMEDIO</p>
+          <p class="kpi-card__value">94.2%</p>
+        </div>
+        <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--tertiary" style="width:94%"></div></div>
+      </div>
+
+      <div class="kpi-card kpi-card--error">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--error"><span class="material-symbols-outlined">warning</span></div>
+          <span class="kpi-card__badge kpi-card__badge--neutral">Urgente</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">ALERTAS PENDIENTES</p>
+          <p class="kpi-card__value">24</p>
+        </div>
+        <div class="kpi-card__bar"><div class="kpi-card__bar-fill kpi-card__bar-fill--error" style="width:40%"></div></div>
+      </div>
+
+    </div>
+
+    <!-- DASHBOARD GRID -->
+    <div class="dashboard-grid">
+    </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>ingreso seguro</title>
+
+  <!-- Hojas de estilo -->
+  <link rel="stylesheet" href="shared1.css"/>
+  <link rel="stylesheet" href="login.css"/>
+</head>
+<body class="login-page">
+
+  <!-- Contenedor de Login -->
+  <main class="login-container">
+
+    <!-- Encabezado -->
+    <header class="login-brand">
+
+      </div>
+      <h1>INGRESO SEGURO</h1>
+      <p>Acceso al Centro de Control Administrativo</p>
+    </header>
+
+    <!-- Tarjeta -->
+    <section class="login-card">
+      <form class="login-form" novalidate method="POST" action="/login">
+
+        <!-- Campos -->
+        <div class="login-fields">
+
+          <div id="errorMessage" class="error-message" style="display: none;">
+            Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.
+          </div>
+
+          <!-- Email -->
+          <div class="field">
+            <label for="email">Correo del Usuario</label>
+            <div class="input-icon-wrap">
+              <input
+id="username" 
+    name="username" 
+    type="text"
+    required
+              />
+            </div>
+          </div>
+
+          <!-- Contraseña -->
+          <div class="field">
+            <div class="field-label-row">
+              <label for="password">Contraseña Segura</label>
+            </div>
+            <div class="input-icon-wrap">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+              />
+              <button class="input-action" type="button" aria-label="Mostrar u ocultar contraseña">
+                <span class="material-symbols-outlined"></span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <!-- Botón -->
+        <button class="login-submit" type="submit">
+          <span class="material-symbols-outlined"></span>
+          Iniciar Sesión
+        </button>
+
+
+  </main>
+<script>
+        // Detecta los parámetros de la URL (ej: ?error=1)
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        if (urlParams.get('error') === '1') {
+            // Si la bandera existe y es 1, mostramos el contenedor de error
+            document.getElementById('errorMessage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
