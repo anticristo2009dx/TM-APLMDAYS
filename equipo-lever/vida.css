@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f2f2f2;
+}
+
+.cv {
+    max-width: 800px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 40px;
+}
+
+
+header h1 {
+    font-size: 30px;
+}
+
+.subtitle {
+    color: #2a6edb;
+    margin: 8px 0 12px;
+    font-size: 16px;
+}
+
+.info {
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+
+section {
+    margin-top: 30px;
+}
+
+section h2 {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 12px;
+}
+
+.item {
+    margin-bottom: 18px;
+}
+
+.title-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-row h3 {
+    font-size: 18px;
+}
+
+.title-row span {
+    font-size: 14px;
+    color: #555;
+}
+
+.empresa {
+    color: #2a6edb;
+    font-size: 15px;
+}
+
+.lugar {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+
+p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.5;
+}
+
+
+ul {
+    margin-left: 20px;
+}
+
+ul li {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.item p {
+    margin-top: 5px;
+}

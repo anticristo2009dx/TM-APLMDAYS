@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="es" data-view="admin">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>administracion</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <!-- Cada vista conserva exactamente las hojas de estilo que tenía su .html.
+       El script de abajo activa solo las de la vista visible, así shared.css,
+       shared1.css y admin.css nunca se pisan entre ellas. -->
+  <link rel="stylesheet" href="/shared.css"    data-view-css="dashboard students" />
+  <link rel="stylesheet" href="/shared1.css"   data-view-css="settings" />
+  <link rel="stylesheet" href="/admin.css"     data-view-css="admin" />
+  <link rel="stylesheet" href="/dashboard.css" data-view-css="dashboard" />
+  <link rel="stylesheet" href="/students.css"  data-view-css="students" />
+  <link rel="stylesheet" href="/settings.css"  data-view-css="settings" />
+  <link rel="stylesheet" href="/theme.css" />
+
+  <style>
+    /* Solo se muestra la vista activa. display:contents hace que el <main>
+       siga siendo hijo directo de <body>, para que el layout no cambie. */
+    .spa-view { display: none; }
+    html[data-view="admin"]     #view-admin,
+    html[data-view="dashboard"] #view-dashboard,
+    html[data-view="students"]  #view-students,
+    html[data-view="settings"]  #view-settings { display: contents; }
+  </style>
+
+  <script>
+    /* Router mínimo. Va en el <head>, despues de los <link>, para que la
+       vista correcta ya este elegida antes del primer pintado. */
+    (function () {
+      var TITULOS = {
+        admin: "administracion",
+        dashboard: "Panel de control",
+        students: "Estudiantes",
+        settings: "Configuración"
+      };
+
+      function vistaDeLaUrl() {
+        var h = window.location.hash.replace("#", "");
+        return TITULOS[h] ? h : "admin";
+      }
+
+      window.mostrarVista = function (vista) {
+        if (!TITULOS[vista]) vista = "admin";
+
+        document.documentElement.setAttribute("data-view", vista);
+        document.title = TITULOS[vista];
+
+        var links = document.querySelectorAll("link[data-view-css]");
+        for (var i = 0; i < links.length; i++) {
+          var para = links[i].getAttribute("data-view-css").split(" ");
+          links[i].disabled = para.indexOf(vista) === -1;
+        }
+
+        var nav = document.querySelectorAll("[data-view-link]");
+        for (var j = 0; j < nav.length; j++) {
+          var activo = nav[j].getAttribute("data-view-link") === vista;
+          nav[j].classList.toggle("topnav__link--active", activo);
+        }
+
+        window.scrollTo(0, 0);
+      };
+
+      window.mostrarVista(vistaDeLaUrl());
+
+      window.addEventListener("hashchange", function () {
+        window.mostrarVista(vistaDeLaUrl());
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        window.mostrarVista(vistaDeLaUrl());
+      });
+    })();
+  </script>
+</head>
+
+<body>
+
+
+  <nav class="topnav">
+    <div class="topnav__left">
+      <span class="topnav__logo">INGRESO SEGURO</span>
+      <div class="topnav__links">
+
+        <a class="topnav__link" href="#dashboard" data-view-link="dashboard">Panel de control</a>
+        <a class="topnav__link" href="#students" data-view-link="students">Estudiantes</a>
+        <a class="topnav__link topnav__link--active" href="#admin" data-view-link="admin">Administrador</a>
+        <a class="topnav__link" href="#settings" data-view-link="settings">Configuración</a>
+        <a class="topnav__link" href="/login">Cerrar sesión</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="spa-view" id="view-admin">
+    <main class="main">
+
+
+
+      <header class="page-header">
+        <div class="page-header__title-row">
+          <h1 class="page-header__title">Centro de Comando Administrativo</h1>
+        </div>
+        <p class="page-header__sub">Estado en tiempo real del sistema y resumen administrativo.</p>
+      </header>
+
+
+      <div class="kpi-grid">
+
+        <div class="kpi-card glass-panel">
+          <div class="kpi-card__top">
+            <span class="kpi-card__label">Usuarios Activos Totales</span>
+            <span class="material-symbols-outlined kpi-card__icon kpi-card__icon--primary">group</span>
+          </div>
+          <div class="kpi-card__bottom">
+            <div>
+              <div class="kpi-card__value">42,892</div>
+              <div class="kpi-card__trend kpi-card__trend--up">
+                <span class="material-symbols-outlined">trending_up</span>
+                <span>12,5%</span>
+              </div>
+            </div>
+            <div class="kpi-card__sparkline">
+              <svg viewBox="0 0 100 40" preserveAspectRatio="none">
+                <path d="M0 35 Q 10 25, 20 30 T 40 15 T 60 25 T 80 5 T 100 10" fill="none" class="sparkline-stroke"
+                  stroke-width="3" stroke-linecap="round" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="kpi-card glass-panel">
+          <div class="kpi-card__top">
+            <span class="kpi-card__label">Tiempo de actividad del sistema</span>
+            <span class="material-symbols-outlined kpi-card__icon kpi-card__icon--green">dns</span>
+          </div>
+          <div class="kpi-card__bottom">
+            <div>
+              <div class="kpi-card__value">99.98%</div>
+              <div class="kpi-card__status">
+                <span class="kpi-card__pulse"></span>
+                <span class="kpi-card__status-label">Clúster Activo</span>
+              </div>
+            </div>
+            <div class="kpi-card__bars-wrap">
+              <span class="kpi-card__bars-caption">7 días</span>
+              <div class="kpi-card__bars">
+                <span class="bar bar--green"></span>
+                <span class="bar bar--green"></span>
+                <span class="bar bar--green"></span>
+                <span class="bar bar--green"></span>
+                <span class="bar bar--green"></span>
+                <span class="bar bar--red"></span>
+                <span class="bar bar--green"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-card glass-panel">
+          <div class="kpi-card__top">
+            <span class="kpi-card__label">Ingresos Registrados Hoy</span>
+            <span class="material-symbols-outlined kpi-card__icon kpi-card__icon--primary">qr_code_scanner</span>
+          </div>
+          <div class="kpi-card__bottom">
+            <div>
+              <div class="kpi-card__value">386</div>
+              <div class="kpi-card__trend kpi-card__trend--up">
+                <span class="material-symbols-outlined">trending_up</span>
+                <span>8,2%</span>
+              </div>
+            </div>
+            <div class="kpi-card__sparkline">
+              <svg viewBox="0 0 100 40" preserveAspectRatio="none">
+                <path d="M0 30 Q 15 20, 25 22 T 50 12 T 75 18 T 100 6" fill="none" class="sparkline-stroke"
+                  stroke-width="3" stroke-linecap="round" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-card glass-panel">
+          <div class="kpi-card__top">
+            <span class="kpi-card__label">Alertas Pendientes</span>
+            <span class="material-symbols-outlined kpi-card__icon kpi-card__icon--orange">warning</span>
+          </div>
+          <div class="kpi-card__bottom">
+            <div>
+              <div class="kpi-card__value">4</div>
+              <div class="kpi-card__trend" style="color: var(--orange);">
+                <span class="material-symbols-outlined">priority_high</span>
+                <span>Revisar hoy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="main-grid">
+
+
+        <div class="side-col">
+          <div class="glass-panel panel--actions">
+            <div class="panel__header">
+              <h3 class="panel__title">Acciones Rápidas</h3>
+            </div>
+            <div class="actions-grid">
+              <button class="action-btn" id="add-student-btn" type="button">
+                <span class="material-symbols-outlined action-btn__icon">person_add</span>
+                <span class="action-btn__label">Agregar Estudiante</span>
+              </button>
+              <a class="action-btn" href="qr.html">
+                <span class="material-symbols-outlined action-btn__icon">qr_code_scanner</span>
+                <span class="action-btn__label">Lector QR</span>
+              </a>
+              <button class="action-btn" id="add-user-btn" type="button">
+                <span class="material-symbols-outlined action-btn__icon">group_add</span>
+                <span class="action-btn__label">Agregar Nuevo Usuario</span>
+              </button>
+              <button class="action-btn">
+                <span class="material-symbols-outlined action-btn__icon">analytics</span>
+                <span class="action-btn__label">Generar Reporte</span>
+              </button>
+              <button class="action-btn action-btn--danger">
+                <span class="material-symbols-outlined action-btn__icon">restart_alt</span>
+                <span class="action-btn__label">Reiniciar Sistema</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="glass-panel panel--activity">
+          <div class="panel__header">
+            <h3 class="panel__title">Actividad Administrativa Reciente</h3>
+            <button class="panel__link-btn">Ver Todos los Registros</button>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Administrador</th>
+                  <th>Descripción de la Acción</th>
+                  <th class="text-right">Marca de Tiempo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% results.forEach((usuario)=> { %>
+                <tr>
+                  <td><%= usuarios.id_usuario %></td>
+                  <td>
+                    <% usuarios.
+                  </td>
+                  <td class="cell--muted">Actualizó Protocolos de Seguridad (Auth v2.1)</td>
+                  
+                  <td class="cell--muted text-right">hace 2 minutos</td>
+                </tr>
+
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+
+
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__brand-col">
+          <div class="site-footer__name">Ingreso Seguro</div>
+          <p class="site-footer__desc">Plataforma integral de gestión educativa: seguridad, asistencia y administración
+            institucional en un solo lugar.</p>
+          <div class="site-footer__logos">
+            <a class="site-footer__logo-slot" href="https://www.seduca.gov.co/" target="_blank" rel="noopener noreferrer"
+              aria-label="Logo institución 1 — ir al sitio de la institución"><img
+                src="logo-institucion-1.jpeg" alt="Logo institución 1" /></a>
+            <a class="site-footer__logo-slot" href="https://pascualbravo.edu.co/" target="_blank"
+              rel="noopener noreferrer" aria-label="Logo institución 2 — ir al sitio de la institución"><img
+                src="logo-institucion-2.jpeg" alt="Logo institución 2" /></a>
+            <a class="site-footer__logo-slot" href="https://www.iesanantoniodeprado.edu.co/" target="_blank"
+              rel="noopener noreferrer" aria-label="Logo institución 3 — ir al sitio de la institución"><img
+                src="escudo-sadep.png" alt="Logo institución 3" /></a>
+          </div>
+        </div>
+        <div class="site-footer__cols">
+          <div>
+            <p class="site-footer__col-title">Nosotros</p>
+            <div class="site-footer__col-links">
+              <a href="nosotros.html">Quiénes somos</a>
+              <a href="nosotros.html">Nuestro equipo</a>
+            </div>
+          </div>
+          <div>
+            <p class="site-footer__col-title">Ayuda</p>
+            <div class="site-footer__col-links">
+              <a href="#">Centro de soporte</a>
+              <a href="#">Preguntas frecuentes</a>
+              <a href="#">Reportar un problema</a>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="site-footer__bottom">
+          <div class="site-footer__copy">© 2026 Ingreso Seguro</div>
+        </div>
+    </footer>
+
+    <!-- ================================================================
+         MODAL: Agregar Estudiante
+         ================================================================= -->
+    <div class="modal-overlay" id="add-student-overlay" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="add-student-title">
+        <div class="modal-card__header">
+          <h3 class="modal-card__title" id="add-student-title">Agregar Estudiante</h3>
+          <button class="modal-card__close" id="add-student-close" type="button" aria-label="Cerrar">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <form class="modal-card__body" id="add-student-form" novalidate>
+
+          <div class="field">
+            <label for="student-nombre">Nombre completo</label>
+            <input id="student-nombre" name="nombre" type="text" required autocomplete="off" />
+            <p class="field-error" id="student-nombre-error" hidden></p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="student-grado">Grado</label>
+              <select id="student-grado" name="grado" required>
+                <option value="" disabled selected>Selecciona un grado</option>
+                <option value="6">Sexto (6°)</option>
+                <option value="7">Séptimo (7°)</option>
+                <option value="8">Octavo (8°)</option>
+                <option value="9">Noveno (9°)</option>
+                <option value="10">Décimo (10°)</option>
+                <option value="11">Once (11°)</option>
+              </select>
+              <p class="field-error" id="student-grado-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="student-grupo">Grupo</label>
+              <select id="student-grupo" name="grupo" required disabled>
+                <option value="" disabled selected>Elige un grado primero</option>
+              </select>
+              <p class="field-error" id="student-grupo-error" hidden></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="student-foto">Foto (opcional)</label>
+            <div class="photo-upload-row">
+              <div class="photo-preview" id="student-photo-preview">
+                <span class="material-symbols-outlined">person</span>
+              </div>
+              <button class="btn btn--outline file-upload-btn" type="button">
+                <span class="material-symbols-outlined btn__icon">upload</span>
+                Subir foto
+                <input type="file" id="student-foto" accept="image/*" />
+              </button>
+            </div>
+          </div>
+
+          <div class="modal-card__preview" id="qr-preview-row" hidden>
+            <span class="material-symbols-outlined">qr_code_2</span>
+            <div>
+              <p class="modal-card__preview-label">Matrícula y código QR (se generan automáticamente)</p>
+              <p class="modal-card__preview-value" id="qr-preview-value">—</p>
+            </div>
+          </div>
+
+          <p class="form-banner" id="add-student-banner" hidden></p>
+
+          <div class="modal-card__actions">
+            <button class="btn btn--outline" type="button" id="add-student-cancel">Cancelar</button>
+            <button class="btn btn--primary" type="submit" id="add-student-submit">
+              <span class="material-symbols-outlined btn__icon">person_add</span>
+              Guardar Estudiante
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- ================================================================
+         MODAL: Agregar Nuevo Usuario (Profesor / Celador)
+         ================================================================= -->
+    <div class="modal-overlay" id="add-user-overlay" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="add-user-title">
+        <div class="modal-card__header">
+          <h3 class="modal-card__title" id="add-user-title">Agregar Nuevo Usuario</h3>
+          <button class="modal-card__close" id="add-user-close" type="button" aria-label="Cerrar">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <form class="modal-card__body" id="add-user-form" novalidate>
+
+          <div class="field">
+            <label for="user-nombre">Nombre completo</label>
+            <input id="user-nombre" name="nombre" type="text" required autocomplete="off" />
+            <p class="field-error" id="user-nombre-error" hidden></p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="user-cedula">Cédula</label>
+              <input id="user-cedula" name="cedula" type="text" required autocomplete="off" />
+              <p class="field-error" id="user-cedula-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="user-rol">Rol</label>
+              <select id="user-rol" name="rol" required>
+                <option value="" disabled selected>Selecciona un rol</option>
+                <option value="1">Profesor</option>
+                <option value="3">Celador</option>
+              </select>
+              <p class="field-error" id="user-rol-error" hidden></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="user-correo">Correo electrónico (opcional)</label>
+            <input id="user-correo" name="correo" type="email" autocomplete="off" />
+          </div>
+
+          <div class="field">
+            <label for="user-contrasena">Contraseña</label>
+            <input id="user-contrasena" name="contrasena" type="password" required autocomplete="new-password" maxlength="20" />
+            <p class="field-error" id="user-contrasena-error" hidden></p>
+          </div>
+
+          <p class="form-banner" id="add-user-banner" hidden></p>
+
+          <div class="modal-card__actions">
+            <button class="btn btn--outline" type="button" id="add-user-cancel">Cancelar</button>
+            <button class="btn btn--primary" type="submit" id="add-user-submit">
+              <span class="material-symbols-outlined btn__icon">group_add</span>
+              Guardar Usuario
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="spa-view" id="view-dashboard">
+    <main class="main-content">
+
+      <header class="page-header">
+        <div>
+          <p class="page-header__eyebrow">Inteligencia Institucional</p>
+          <h1 class="page-header__title">Panel de Control General</h1>
+        </div>
+        <div class="page-header__actions">
+          <button class="btn btn--outline" id="export-report-btn" type="button">
+            <span class="material-symbols-outlined btn__icon">download</span>
+            EXPORTAR REPORTE
+          </button>
+          <a class="btn btn--primary" href="qr.html">
+            <span class="material-symbols-outlined btn__icon">qr_code_scanner</span>
+            NUEVO INGRESO
+          </a>
+        </div>
+      </header>
+
+      <!-- KPI GRID -->
+      <div class="kpi-grid">
+
+        <div class="kpi-card kpi-card--primary">
+          <div class="kpi-card__top">
+            <div class="kpi-card__icon kpi-card__icon--primary"><span class="material-symbols-outlined">school</span>
+            </div>
+            <span class="kpi-card__badge kpi-card__badge--positive">+12.5%</span>
+          </div>
+          <div>
+            <p class="kpi-card__label">TOTAL DE ESTUDIANTES</p>
+            <p class="kpi-card__value">12,482</p>
+          </div>
+          <div class="kpi-card__bar">
+            <div class="kpi-card__bar-fill kpi-card__bar-fill--primary" style="width:75%"></div>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-card--secondary">
+          <div class="kpi-card__top">
+            <div class="kpi-card__icon kpi-card__icon--secondary"><span
+                class="material-symbols-outlined">person_celebrate</span></div>
+            <span class="kpi-card__badge kpi-card__badge--neutral">Estable</span>
+          </div>
+          <div>
+            <p class="kpi-card__label">PROFESORES ACTIVOS</p>
+            <p class="kpi-card__value">312</p>
+          </div>
+          <div class="kpi-card__bar">
+            <div class="kpi-card__bar-fill kpi-card__bar-fill--secondary" style="width:92%"></div>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-card--tertiary">
+          <div class="kpi-card__top">
+            <div class="kpi-card__icon kpi-card__icon--tertiary"><span
+                class="material-symbols-outlined">event_available</span></div>
+            <span class="kpi-card__badge kpi-card__badge--negative">-2.1%</span>
+          </div>
+          <div>
+            <p class="kpi-card__label">ASISTENCIA PROMEDIO</p>
+            <p class="kpi-card__value">94.2%</p>
+          </div>
+          <div class="kpi-card__bar">
+            <div class="kpi-card__bar-fill kpi-card__bar-fill--tertiary" style="width:94%"></div>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-card--error">
+          <div class="kpi-card__top">
+            <div class="kpi-card__icon kpi-card__icon--error"><span class="material-symbols-outlined">warning</span></div>
+            <span class="kpi-card__badge kpi-card__badge--neutral">Urgente</span>
+          </div>
+          <div>
+            <p class="kpi-card__label">ALERTAS PENDIENTES</p>
+            <p class="kpi-card__value">24</p>
+          </div>
+          <div class="kpi-card__bar">
+            <div class="kpi-card__bar-fill kpi-card__bar-fill--error" style="width:40%"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- DASHBOARD GRID -->
+      <div class="dashboard-grid">
+        <div class="glass-card panel--table">
+          <div class="panel__header">
+            <div>
+              <h3 class="panel__title">Registros de Ingreso Recientes</h3>
+              <p class="panel__subtitle">Últimos registros capturados por el lector QR en portería.</p>
+            </div>
+            <button class="panel__link-btn" id="export-report-btn-2" type="button">
+              <span class="material-symbols-outlined" style="font-size:1rem;">download</span>
+              Exportar
+            </button>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Estudiante</th>
+                  <th>Matrícula</th>
+                  <th>Fecha y Hora</th>
+                  <th>Registrado por</th>
+                </tr>
+              </thead>
+              <tbody id="registros-tbody">
+                <tr>
+                  <td colspan="4" class="table-empty-state">Cargando registros…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ================================================================
+         PIE DE PÁGINA
+         ================================================================= -->
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__brand-col">
+          <div class="site-footer__name">Ingreso Seguro</div>
+          <p class="site-footer__desc">Plataforma integral de gestión educativa: seguridad, asistencia y administración
+            institucional en un solo lugar.</p>
+          <div class="site-footer__logos">
+            <a class="site-footer__logo-slot" href="https://www.seduca.gov.co/" target="_blank" rel="noopener noreferrer"
+              aria-label="Logo institución 1 — ir al sitio de la institución"><img
+                src="logo-institucion-1.jpeg" alt="Logo institución 1" /></a>
+            <a class="site-footer__logo-slot" href="https://pascualbravo.edu.co/" target="_blank"
+              rel="noopener noreferrer" aria-label="Logo institución 2 — ir al sitio de la institución"><img
+                src="logo-institucion-2.jpeg" alt="Logo institución 2" /></a>
+            <a class="site-footer__logo-slot" href="https://www.iesanantoniodeprado.edu.co/" target="_blank"
+              rel="noopener noreferrer" aria-label="Logo institución 3 — ir al sitio de la institución"><img
+                src="escudo-sadep.png" alt="Logo institución 3" /></a>
+          </div>
+        </div>
+        <div class="site-footer__cols">
+          <div>
+            <p class="site-footer__col-title">Nosotros</p>
+            <div class="site-footer__col-links">
+              <a href="nosotros.html">Quiénes somos</a>
+              <a href="nosotros.html">Nuestro equipo</a>
+            </div>
+          </div>
+          <div>
+            <p class="site-footer__col-title">Ayuda</p>
+            <div class="site-footer__col-links">
+              <a href="#">Centro de soporte</a>
+              <a href="#">Preguntas frecuentes</a>
+              <a href="#">Reportar un problema</a>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="site-footer__bottom">
+          <div class="site-footer__copy">© 2026 Ingreso Seguro</div>
+        </div>
+    </footer>
+  </div>
+
+  <div class="spa-view" id="view-students">
+    <main class="main-content">
+
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Estudiantes</h1>
+          <p class="page-subtitle">Gestion del ingreso seguro de los estudiantes.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn--outline" id="toggle-filters-btn" type="button" aria-expanded="false" aria-controls="filters-panel">
+            <span class="material-symbols-outlined btn__icon">filter_list</span>
+            Filtros
+          </button>
+          <a class="btn btn--outline" href="qr.html">
+            <span class="material-symbols-outlined btn__icon">qr_code_scanner</span>
+            Escanear QR
+          </a>
+        </div>
+      </div>
+
+      <div class="glass-card filters-panel" id="filters-panel" hidden>
+        <div class="filters-panel__row">
+          <div class="filters-panel__field filters-panel__field--search">
+            <span class="material-symbols-outlined">search</span>
+            <input type="text" id="filter-search" placeholder="Buscar por nombre o matrícula…" autocomplete="off" />
+          </div>
+          <div class="filters-panel__field">
+            <label for="filter-grado">Grado</label>
+            <select id="filter-grado">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filters-panel__field">
+            <label for="filter-estado">Estado</label>
+            <select id="filter-estado">
+              <option value="">Todos</option>
+              <option value="Activo">Activo</option>
+              <option value="En Prueba">En Prueba</option>
+              <option value="Suspendido">Suspendido</option>
+            </select>
+          </div>
+          <button class="btn btn--outline" id="clear-filters-btn" type="button">
+            <span class="material-symbols-outlined btn__icon">close</span>
+            Limpiar
+          </button>
+        </div>
+        <p class="filters-panel__count" id="filters-count"></p>
+      </div>
+
+      <div class="stats-grid">
+
+        <div class="glass-card stat-card">
+          <div class="stat-icon primary">
+            <span class="material-symbols-outlined">group</span>
+          </div>
+          <div>
+            <p class="stat-label">Total de Estudiantes</p>
+            <p class="stat-value" id="stat-total">—</p>
+          </div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-icon secondary">
+            <span class="material-symbols-outlined">trending_up</span>
+          </div>
+          <div>
+            <p class="stat-label">Asistencia Promedio</p>
+            <p class="stat-value" id="stat-attendance">—</p>
+          </div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-icon tertiary">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div>
+            <p class="stat-label">En Lista de Honor</p>
+            <p class="stat-value" id="stat-honor">—</p>
+          </div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-icon error">
+            <span class="material-symbols-outlined">warning</span>
+          </div>
+          <div>
+            <p class="stat-label">En Riesgo</p>
+            <p class="stat-value" id="stat-risk">—</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="glass-card table-wrapper">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Estudiante</th>
+                <th>Matrícula</th>
+                <th>Grado / Grupo</th>
+                <th>Estado</th>
+                <th>Asistencia</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="students-tbody">
+              <tr>
+                <td colspan="6" class="students-empty">Cargando estudiantes…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <span class="pagination-info" id="pagination-info">Mostrando…</span>
+          <div class="pagination-controls" id="pagination-controls"></div>
+        </div>
+      </div>
+      <footer class="site-footer">
+        <div class="site-footer__inner">
+          <div class="site-footer__brand-col">
+            <div class="site-footer__name">Ingreso Seguro</div>
+            <p class="site-footer__desc">Plataforma integral de gestión educativa: seguridad, asistencia y administración
+              institucional en un solo lugar.</p>
+            <div class="site-footer__logos">
+              <a class="site-footer__logo-slot" href="https://www.seduca.gov.co/" target="_blank"
+                rel="noopener noreferrer" aria-label="Logo institución 1 — ir al sitio de la institución"><img
+                  src="logo-institucion-1.jpeg" alt="Logo institución 1" /></a>
+              <a class="site-footer__logo-slot" href="https://pascualbravo.edu.co/" target="_blank"
+                rel="noopener noreferrer" aria-label="Logo institución 2 — ir al sitio de la institución"><img
+                  src="logo-institucion-2.jpeg" alt="Logo institución 2" /></a>
+              <a class="site-footer__logo-slot" href="https://www.iesanantoniodeprado.edu.co/" target="_blank"
+                rel="noopener noreferrer" aria-label="Logo institución 3 — ir al sitio de la institución"><img
+                  src="escudo-sadep.png" alt="Logo institución 3" /></a>
+            </div>
+          </div>
+          <div class="site-footer__cols">
+          <div>
+            <p class="site-footer__col-title">Nosotros</p>
+            <div class="site-footer__col-links">
+              <a href="nosotros.html">Quiénes somos</a>
+              <a href="nosotros.html">Nuestro equipo</a>
+            </div>
+          </div>
+          <div>
+            <p class="site-footer__col-title">Ayuda</p>
+            <div class="site-footer__col-links">
+              <a href="#">Centro de soporte</a>
+              <a href="#">Preguntas frecuentes</a>
+              <a href="#">Reportar un problema</a>
+            </div>
+          </div>
+        </div>
+          </div>
+        <div class="site-footer__bottom">
+            <div class="site-footer__copy">© 2026 Ingreso Seguro</div>
+          </div>
+      </footer>
+
+    </main>
+
+    <!-- Modal: Ver código QR -->
+    <div class="modal-overlay" id="qr-view-overlay" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="qr-view-title">
+        <div class="modal-card__header">
+          <h3 class="modal-card__title" id="qr-view-title">Código QR del estudiante</h3>
+          <button class="modal-card__close" id="qr-view-close" type="button" aria-label="Cerrar">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="modal-card__body">
+          <div class="qr-view">
+            <canvas id="qr-view-canvas" width="220" height="220"></canvas>
+            <p class="qr-view__name" id="qr-view-name">—</p>
+            <p class="qr-view__meta" id="qr-view-meta">—</p>
+          </div>
+          <div class="modal-card__actions">
+            <button class="btn btn--outline" id="qr-view-download" type="button">
+              <span class="material-symbols-outlined btn__icon">download</span>
+              Descargar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Editar Estudiante -->
+    <div class="modal-overlay" id="edit-student-overlay" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="edit-student-title">
+        <div class="modal-card__header">
+          <h3 class="modal-card__title" id="edit-student-title">Editar Estudiante</h3>
+          <button class="modal-card__close" id="edit-student-close" type="button" aria-label="Cerrar">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <form class="modal-card__body" id="edit-student-form" novalidate>
+          <input type="hidden" id="edit-student-matricula" />
+
+          <div class="field">
+            <label for="edit-student-nombre">Nombre completo</label>
+            <input id="edit-student-nombre" type="text" required autocomplete="off" />
+            <p class="field-error" id="edit-nombre-error" hidden></p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="edit-student-grado">Grado</label>
+              <select id="edit-student-grado" required>
+                <option value="6">Sexto (6°)</option>
+                <option value="7">Séptimo (7°)</option>
+                <option value="8">Octavo (8°)</option>
+                <option value="9">Noveno (9°)</option>
+                <option value="10">Décimo (10°)</option>
+                <option value="11">Once (11°)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="edit-student-grupo">Grupo</label>
+              <select id="edit-student-grupo" required>
+                <option value="1">Grupo 1</option>
+                <option value="2">Grupo 2</option>
+                <option value="3">Grupo 3</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="edit-student-estado">Estado</label>
+            <select id="edit-student-estado">
+              <option value="Activo">Activo</option>
+              <option value="En Prueba">En Prueba</option>
+              <option value="Suspendido">Suspendido</option>
+            </select>
+          </div>
+
+          <p class="form-banner" id="edit-student-banner" hidden></p>
+
+          <div class="modal-card__actions">
+            <button class="btn btn--outline" type="button" id="edit-student-cancel">Cancelar</button>
+            <button class="btn btn--primary" type="submit">
+              <span class="material-symbols-outlined btn__icon">save</span>
+              Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="spa-view" id="view-settings">
+    <main class="main-content">
+      <div class="settings-inner">
+
+        <div class="settings-page-header">
+          <h1 class="text-h1">Perfil</h1>
+          <p class="text-body-md">Administra tu perfil.</p>
+        </div>
+
+        <div class="bento-grid">
+
+          <div class="section-card col-6">
+            <div class="section-card-header">
+              <h3 class="text-h3">Información Personal</h3>
+            </div>
+            <div class="section-card-body">
+
+              <div class="profile-row">
+                <div class="avatar-photo">
+                  <div class="avatar-photo-overlay">
+                    <span class="material-symbols-outlined">photo_camera</span>
+                  </div>
+                </div>
+                <div class="profile-row-text">
+                  <p class="profile-name">Jefferson Lopez</p>
+                  <p class="profile-role">Administrador</p>
+                </div>
+              </div>
+
+              <div class="info-grid">
+                <div class="field">
+                  <label>Nombre Completo</label>
+                  <input type="text" value="Jefferson Lopez"/>
+                </div>
+                <div class="field">
+                  <label>Correo Electrónico</label>
+                  <input type="email" value="jefferson.lopez@ingresoseguro.edu.co"/>
+                </div>
+                <div class="field span-2">
+                  <label>Cargo</label>
+                  <div class="field-readonly">
+                    <span>Administrador</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="section-card-footer">
+              <button class="btn btn-primary btn-sm">Guardar Cambios</button>
+            </div>
+          </div>
+
+          <div class="section-card col-6">
+            <div class="section-card-header">
+              <h3 class="text-h3">Seguridad y Acceso</h3>
+            </div>
+            <div class="section-card-body">
+              <div class="password-fields">
+                <div class="field">
+                  <label>Contraseña Actual</label>
+                  <input type="password" placeholder="••••••••"/>
+                </div>
+
+                <div class="field">
+                  <label>Nueva Contraseña</label>
+                  <input type="password"/>
+                </div>
+
+                <div class="field">
+                  <label>Confirmar Contraseña</label>
+                  <input type="password"/>
+                </div>
+
+                <button class="btn btn-surface btn-full">Actualizar Contraseña</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="danger-zone col-12">
+            <div>
+              <h3>Zona de Riesgo</h3>
+              <p>Desactivar el acceso administrativo. Esta acción no se puede deshacer.</p>
+            </div>
+            <button class="btn btn-danger">Desactivar Cuenta</button>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Los scripts de las cuatro vistas conviven sin problema: cada uno
+       comprueba si su parte del DOM existe y todas están en esta página. -->
+  <script src="/jspdf.umd.min.js"></script>
+  <script src="/jspdf.plugin.autotable.min.js"></script>
+  <script src="/qrious.min.js"></script>
+  <script src="/dashboard.js" defer></script>
+  <script src="/students.js" defer></script>
+  <script src="/admin-students.js" defer></script>
+  <script src="/admin-users.js" defer></script>
+  <script src="/theme-toggle.js" defer></script>
+</body>
+
+</html>

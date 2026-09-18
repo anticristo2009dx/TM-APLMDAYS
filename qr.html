@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Lectura QR — Ingreso Seguro</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="qr.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+
+<body>
+
+  <nav class="topnav">
+    <div class="topnav__left">
+      <span class="topnav__logo">INGRESO SEGURO</span>
+      <div class="topnav__links">
+        <a class="topnav__link" href="/">Inicio</a>
+        <a class="topnav__link" href="dashboard.html">Panel de control</a>
+        <a class="topnav__link" href="students.html">Estudiantes</a>
+        <a class="topnav__link" href="admin.html">Administrador</a>
+        <a class="topnav__link" href="#">Reportes</a>
+        <a class="topnav__link" href="settings.html">Configuración</a>
+        <a class="topnav__link" href="/login">Cerrar sesión</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+
+    <div class="page-header">
+      <div>
+        <p class="page-header__eyebrow">Control de Acceso</p>
+        <h1 class="page-header__title">Lectura de Código QR</h1>
+        <p class="page-header__desc">Escanea el carné de un estudiante o docente para registrar su ingreso en tiempo real.</p>
+      </div>
+    </div>
+
+    <div class="qr-grid">
+
+      <!-- Panel del escáner -->
+      <div class="glass-card scanner-panel">
+        <div class="panel__header">
+          <h3 class="panel__title">Escáner</h3>
+        </div>
+        <div class="scanner-body">
+
+          <div class="scanner-viewport" id="scanner-viewport">
+            <video id="scanner-video" playsinline muted></video>
+            <div class="scanner-placeholder">
+              <span class="material-symbols-outlined">qr_code_scanner</span>
+              <span>La cámara está apagada. Inícala o usa una de las alternativas de abajo.</span>
+            </div>
+            <div class="scanner-reticle"></div>
+            <span class="scanner-status" id="scanner-status">En espera</span>
+          </div>
+
+          <div class="scanner-actions">
+            <button class="btn btn--primary" id="start-camera-btn" type="button">
+              <span class="material-symbols-outlined btn__icon">videocam</span>
+              Iniciar cámara
+            </button>
+            <button class="btn btn--outline" id="stop-camera-btn" type="button" hidden>
+              <span class="material-symbols-outlined btn__icon">videocam_off</span>
+              Detener cámara
+            </button>
+            <button class="btn btn--outline" id="simulate-btn" type="button">
+              <span class="material-symbols-outlined btn__icon">bolt</span>
+              Simular escaneo (demo)
+            </button>
+          </div>
+
+          <div class="scanner-alt">
+            <div class="scanner-alt__row">
+              <span class="scanner-alt__label">¿Sin cámara disponible? Sube una imagen con el código QR:</span>
+              <button class="btn btn--outline file-upload-btn" type="button">
+                <span class="material-symbols-outlined btn__icon">upload</span>
+                Subir imagen
+                <input type="file" id="qr-file-input" accept="image/*" />
+              </button>
+            </div>
+          </div>
+
+          <canvas id="scanner-canvas" hidden></canvas>
+        </div>
+      </div>
+
+      <!-- Columna lateral -->
+      <div class="side-col">
+
+        <div class="glass-card scan-result-card">
+          <h3 class="panel__title" style="margin-bottom: 1rem;">Último registro</h3>
+          <div id="scan-result-empty" class="scan-result-empty">
+            <span class="material-symbols-outlined">badge</span>
+            <span>Todavía no se ha escaneado ningún código en esta sesión.</span>
+          </div>
+          <div id="scan-result" class="scan-result" hidden>
+            <div class="scan-result__avatar" id="scan-result-avatar">--</div>
+            <div>
+              <p class="scan-result__name" id="scan-result-name">—</p>
+              <p class="scan-result__meta" id="scan-result-meta">—</p>
+              <p class="scan-result__time" id="scan-result-time">—</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card recent-scans">
+          <div class="panel__header">
+            <h3 class="panel__title">Registros recientes</h3>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table" id="recent-scans-table">
+              <thead>
+                <tr>
+                  <th>Estudiante</th>
+                  <th>Estado</th>
+                  <th class="text-right">Hora</th>
+                </tr>
+              </thead>
+              <tbody id="recent-scans-body"></tbody>
+            </table>
+          </div>
+          <p class="recent-scans-empty" id="recent-scans-empty">Aún no hay registros de asistencia en esta sesión.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Códigos QR de prueba, para evaluar sin necesidad de cámara -->
+    <div class="glass-card qr-samples">
+      <h3 class="panel__title">Códigos QR de prueba</h3>
+      <p class="scanner-alt__label">Descarga cualquiera de estos códigos y súbelo con el botón "Subir imagen" para probar la lectura sin usar la cámara.</p>
+      <div class="qr-samples__grid">
+        <a class="qr-sample" href="qr-demo/qr-2024-8842.png" download>
+          <img src="qr-demo/qr-2024-8842.png" alt="Código QR de Mariana Gómez" />
+          <span class="qr-sample__name">Mariana Gómez</span>
+          <span class="qr-sample__hint">#2024-8842</span>
+        </a>
+        <a class="qr-sample" href="qr-demo/qr-2024-1105.png" download>
+          <img src="qr-demo/qr-2024-1105.png" alt="Código QR de Santiago Restrepo" />
+          <span class="qr-sample__name">Santiago Restrepo</span>
+          <span class="qr-sample__hint">#2024-1105</span>
+        </a>
+        <a class="qr-sample" href="qr-demo/qr-2024-9221.png" download>
+          <img src="qr-demo/qr-2024-9221.png" alt="Código QR de Valentina Ortiz" />
+          <span class="qr-sample__name">Valentina Ortiz</span>
+          <span class="qr-sample__hint">#2024-9221</span>
+        </a>
+        <a class="qr-sample" href="qr-demo/qr-2024-4412.png" download>
+          <img src="qr-demo/qr-2024-4412.png" alt="Código QR de Juan Pablo Cardona" />
+          <span class="qr-sample__name">Juan Pablo Cardona</span>
+          <span class="qr-sample__hint">#2024-4412</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand-col">
+        <span class="site-footer__logo">INGRESO SEGURO</span>
+        <p class="site-footer__desc">Plataforma integral de gestión educativa: seguridad, asistencia y administración institucional en un solo lugar.</p>
+        <div class="site-footer__logos">
+          <a class="site-footer__logo-slot" href="https://www.seduca.gov.co/" target="_blank" rel="noopener noreferrer" aria-label="Logo institución 1 — ir al sitio de la institución"><img src="logo-institucion-1.jpeg" alt="Logo institución 1" /></a>
+          <a class="site-footer__logo-slot" href="https://pascualbravo.edu.co/" target="_blank" rel="noopener noreferrer" aria-label="Logo institución 2 — ir al sitio de la institución"><img src="logo-institucion-2.jpeg" alt="Logo institución 2" /></a>
+          <a class="site-footer__logo-slot" href="https://www.iesanantoniodeprado.edu.co/" target="_blank" rel="noopener noreferrer" aria-label="Logo institución 3 — ir al sitio de la institución"><img src="escudo-sadep.png" alt="Logo institución 3" /></a>
+        </div>
+      </div>
+      <div class="site-footer__cols">
+        <div>
+          <p class="site-footer__col-title">Nosotros</p>
+          <div class="site-footer__col-links">
+            <a href="nosotros.html">Quiénes somos</a>
+            <a href="nosotros.html">Nuestro equipo</a>
+          </div>
+        </div>
+        <div>
+          <p class="site-footer__col-title">Ayuda</p>
+          <div class="site-footer__col-links">
+            <a href="#">Centro de soporte</a>
+            <a href="#">Preguntas frecuentes</a>
+            <a href="#">Reportar un problema</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="site-footer__copy">© 2026 Ingreso Seguro</div>
+    </div>
+  </footer>
+
+  <script src="jsQR.js"></script>
+  <script src="qr-scanner.js" defer></script>
+  <script src="theme-toggle.js" defer></script>
+</body>
+
+</html>

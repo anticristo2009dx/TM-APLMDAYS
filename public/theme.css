@@ -1,0 +1,228 @@
+
+/* ============================================================
+   MODO CLARO — paleta rediseñada
+   Inspirada en la página de login: blancos limpios + azul claro,
+   con buen contraste de texto y tarjetas claramente diferenciadas
+   del fondo (no todo "pegado" al mismo tono).
+   ============================================================ */
+html[data-theme="light"] {
+  --background:                  #eaf0fb;
+  --surface:                     #eaf0fb;
+  --surface-dim:                 #d7e0f3;
+  --surface-bright:              #ffffff;
+  --surface-variant:             #e1e8f7;
+  --surface-container-lowest:    #ffffff;
+  --surface-container-low:       #f5f8fd;
+  --surface-container:           #ffffff;
+  --surface-container-high:      #eef3fc;
+  --surface-container-highest:   #e3eaf9;
+  --inverse-surface:             #2e3038;
+  --inverse-on-surface:          #f1f0f7;
+  --inverse-primary:             #adc6ff;
+  --surface-tint:                #2f6fed;
+
+  --on-background:               #16213a;
+  --on-surface:                  #16213a;
+  --on-surface-variant:          #48536b;
+
+  --primary:                     #2f6fed;
+  --primary-fixed:               #d8e2ff;
+  --primary-fixed-dim:           #adc6ff;
+  --primary-container:           #dce8ff;
+  --on-primary:                  #ffffff;
+  --on-primary-fixed:            #001a42;
+  --on-primary-fixed-variant:    #004395;
+  --on-primary-container:        #0a3d91;
+
+  --secondary:                   #4a5578;
+  --secondary-fixed:             #d3e4fe;
+  --secondary-fixed-dim:         #b7c8e1;
+  --secondary-container:         #e1e7f8;
+  --on-secondary:                #ffffff;
+  --on-secondary-fixed:          #0b1c30;
+  --on-secondary-fixed-variant:  #38485d;
+  --on-secondary-container:      #1f2944;
+
+  --tertiary:                    #9a5000;
+  --tertiary-fixed:              #ffdcc6;
+  --tertiary-fixed-dim:          #ffb786;
+  --tertiary-container:          #ffe4cc;
+  --on-tertiary:                 #ffffff;
+  --on-tertiary-fixed:           #311400;
+  --on-tertiary-fixed-variant:   #723600;
+  --on-tertiary-container:       #341100;
+  --accent:                      #9a5000;
+  --accent-container:            #ffe4cc;
+  --on-accent-container:         #341100;
+
+  /* Error */
+  --error:                       #ba1a1a;
+  --error-container:             #ffdad6;
+  --on-error:                    #ffffff;
+  --on-error-container:          #410002;
+
+  --outline:                     #6b7690;
+  --outline-variant:             #d3dcef;
+
+  --slate-50:  #f8fafc;
+  --slate-200: #e2e8f0;
+  --slate-400: #64748b;
+  --slate-500: #475569;
+  --slate-600: #334155;
+  --slate-700: #cbd5e1;
+  --slate-800: #e7edfa;
+  --slate-900: #f2f6fd;
+  --slate-950: #ffffff;
+
+  --green:     #16a34a;
+  --green-dim: #15803d;
+  --red:       #ba1a1a;
+  --orange:    #c2570c;
+  --blue:      #2f6fed;
+}
+
+/* ── Fondo general con el mismo aire "azul clarito" del login ── */
+html[data-theme="light"] body {
+  background-image:
+    radial-gradient(at 0% 0%,   hsla(220, 85%, 94%, 1) 0, transparent 45%),
+    radial-gradient(at 100% 0%, hsla(210, 85%, 95%, 1) 0, transparent 45%);
+  background-attachment: fixed;
+}
+
+/* ── Tarjetas: mucho más diferenciadas del fondo ─────────────── */
+html[data-theme="light"] .glass-panel,
+html[data-theme="light"] .glass-card,
+html[data-theme="light"] .kpi-card,
+html[data-theme="light"] .section-card,
+html[data-theme="light"] .stat-card,
+html[data-theme="light"] .modal-card,
+html[data-theme="light"] .row-actions-menu,
+html[data-theme="light"] .scanner-panel,
+html[data-theme="light"] .scan-result-card,
+html[data-theme="light"] .recent-scans,
+html[data-theme="light"] .qr-samples {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(47, 111, 237, 0.16);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 10px 28px -12px rgba(16, 24, 40, 0.16);
+}
+
+html[data-theme="light"] .table-wrapper,
+html[data-theme="light"] .panel--activity,
+html[data-theme="light"] .panel--table {
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 10px 28px -12px rgba(16, 24, 40, 0.16);
+}
+
+/* ── Encabezados de tabla: ya no se quedan oscuros fijos ─────── */
+html[data-theme="light"] thead tr,
+html[data-theme="light"] .data-table thead tr,
+html[data-theme="light"] .dir-table thead tr {
+  background-color: rgba(47, 111, 237, 0.07);
+}
+
+html[data-theme="light"] .data-table tbody tr:hover,
+html[data-theme="light"] .dir-table tbody tr:hover,
+html[data-theme="light"] tbody tr:hover {
+  background-color: rgba(47, 111, 237, 0.045);
+}
+
+html[data-theme="light"] .pagination {
+  background: rgba(47, 111, 237, 0.05);
+  border-top-color: var(--outline-variant);
+}
+
+html[data-theme="light"] .btn-surface:hover {
+  background: var(--surface-container-highest);
+}
+
+html[data-theme="light"] .hero__pill {
+  background-color: rgba(47, 111, 237, 0.08);
+  border-color: rgba(47, 111, 237, 0.2);
+}
+
+/* ── Barra superior (topnav Y site-header de la portada) ─────── */
+html[data-theme="light"] .topnav,
+html[data-theme="light"] .site-header {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom-color: var(--outline-variant);
+  box-shadow: 0 1px 0 rgba(16, 24, 40, 0.05), 0 8px 24px -16px rgba(16, 24, 40, 0.2);
+}
+
+html[data-theme="light"] .topnav__search {
+  background-color: var(--surface-container-low);
+  border-color: var(--outline-variant);
+}
+
+html[data-theme="light"] .site-footer {
+  background-color: rgba(255, 255, 255, 0.92);
+  border-top-color: var(--outline-variant);
+}
+
+html[data-theme="light"] .carrusel {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 25px 50px -12px rgba(15, 23, 42, 0.15),
+    0 0 0 1px rgba(47, 111, 237, 0.15);
+}
+
+html[data-theme="light"] body.login-page {
+  background-image:
+    radial-gradient(at 0% 0%,   hsla(220, 85%, 92%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(210, 85%, 94%, 1) 0, transparent 50%);
+}
+
+html[data-theme="light"] .login-card {
+  background: #ffffff;
+  box-shadow: 0 25px 50px -12px rgba(16, 24, 40, 0.25);
+}
+
+html[data-theme="light"] .login-bg-icons .material-symbols-outlined {
+  color: var(--primary);
+  opacity: 0.07;
+}
+
+html[data-theme="light"] .hero__title,
+html[data-theme="light"] .site-header__logo,
+html[data-theme="light"] .topnav__logo {
+  color: var(--on-background);
+}
+
+/* ── Modal "Agregar / Editar estudiante": texto que sí contrasta ── */
+html[data-theme="light"] .modal-card__title { color: var(--on-background); }
+html[data-theme="light"] .modal-card__close:hover {
+  color: var(--on-background);
+  background-color: rgba(47, 111, 237, 0.08);
+}
+
+body, .topnav, .site-header, .glass-panel, .glass-card, .kpi-card, .site-footer, .carrusel {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+
+#theme-toggle-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 999;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid var(--outline-variant, #424754);
+  background-color: var(--surface-container, #1d2027);
+  color: var(--on-surface, #e1e2ec);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, background-color 0.25s ease, color 0.25s ease;
+}
+#theme-toggle-btn:hover  { transform: scale(1.08); }
+#theme-toggle-btn:active { transform: scale(0.95); }
+#theme-toggle-btn .material-symbols-outlined {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  #theme-toggle-btn { top: 1rem; right: 2rem; }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>ingreso seguro</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="shared1.css"/>
+  <link rel="stylesheet" href="settings.css"/>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+
+  <nav class="topnav">
+    <div class="topnav__left">
+      <span class="topnav__logo">INGRESO SEGURO</span>
+      <div class="topnav__links">
+        <a class="topnav__link" href="/">Inicio</a>
+        <a class="topnav__link" href="dashboard.html">Panel de control</a>
+        <a class="topnav__link" href="students.html">Estudiantes</a>
+        <a class="topnav__link" href="admin.html">Administrador</a>
+        <a class="topnav__link" href="#">Reportes</a>
+        <a class="topnav__link topnav__link--active" href="settings.html">Configuración</a>
+        <a class="topnav__link" href="/login">Cerrar sesión</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="settings-inner">
+
+      <div class="settings-page-header">
+        <h1 class="text-h1">Perfil</h1>
+        <p class="text-body-md">Administra tu perfil.</p>
+      </div>
+
+      <div class="bento-grid">
+
+        <div class="section-card col-6">
+          <div class="section-card-header">
+            <h3 class="text-h3">Información Personal</h3>
+          </div>
+          <div class="section-card-body">
+
+            <div class="profile-row">
+              <div class="avatar-photo">
+                <div class="avatar-photo-overlay">
+                  <span class="material-symbols-outlined">photo_camera</span>
+                </div>
+              </div>
+              <div class="profile-row-text">
+                <p class="profile-name">Jefferson Lopez</p>
+                <p class="profile-role">Administrador</p>
+              </div>
+            </div>
+
+            <div class="info-grid">
+              <div class="field">
+                <label>Nombre Completo</label>
+                <input type="text" value="Jefferson Lopez"/>
+              </div>
+              <div class="field">
+                <label>Correo Electrónico</label>
+                <input type="email" value="jefferson.lopez@ingresoseguro.edu.co"/>
+              </div>
+              <div class="field span-2">
+                <label>Cargo</label>
+                <div class="field-readonly">
+                  <span>Administrador</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="section-card-footer">
+            <button class="btn btn-primary btn-sm">Guardar Cambios</button>
+          </div>
+        </div>
+
+        <div class="section-card col-6">
+          <div class="section-card-header">
+            <h3 class="text-h3">Seguridad y Acceso</h3>
+          </div>
+          <div class="section-card-body">
+            <div class="password-fields">
+              <div class="field">
+                <label>Contraseña Actual</label>
+                <input type="password" placeholder="••••••••"/>
+              </div>
+
+              <div class="field">
+                <label>Nueva Contraseña</label>
+                <input type="password"/>
+              </div>
+
+              <div class="field">
+                <label>Confirmar Contraseña</label>
+                <input type="password"/>
+              </div>
+
+              <button class="btn btn-surface btn-full">Actualizar Contraseña</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="danger-zone col-12">
+          <div>
+            <h3>Zona de Riesgo</h3>
+            <p>Desactivar el acceso administrativo. Esta acción no se puede deshacer.</p>
+          </div>
+          <button class="btn btn-danger">Desactivar Cuenta</button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="theme-toggle.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de control</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+
+<body>
+
+  <nav class="topnav">
+    <div class="topnav__left">
+      <span class="topnav__logo">INGRESO SEGURO</span>
+      <div class="topnav__links">
+        <a class="topnav__link" href="/">Inicio</a>
+        <a class="topnav__link topnav__link--active" href="dashboard.html">Panel de control</a>
+        <a class="topnav__link" href="students.html">Estudiantes</a>
+        <a class="topnav__link" href="admin.html">Administrador</a>
+        <a class="topnav__link" href="#">Reportes</a>
+        <a class="topnav__link" href="settings.html">Configuración</a>
+        <a class="topnav__link" href="/login">Cerrar sesión</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+
+    <header class="page-header">
+      <div>
+        <p class="page-header__eyebrow">Inteligencia Institucional</p>
+        <h1 class="page-header__title">Panel de Control General</h1>
+      </div>
+      <div class="page-header__actions">
+        <button class="btn btn--outline" id="export-report-btn" type="button">
+          <span class="material-symbols-outlined btn__icon">download</span>
+          EXPORTAR REPORTE
+        </button>
+        <a class="btn btn--primary" href="qr.html">
+          <span class="material-symbols-outlined btn__icon">qr_code_scanner</span>
+          NUEVO INGRESO
+        </a>
+      </div>
+    </header>
+
+    <!-- KPI GRID -->
+    <div class="kpi-grid">
+
+      <div class="kpi-card kpi-card--primary">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--primary"><span class="material-symbols-outlined">school</span>
+          </div>
+          <span class="kpi-card__badge kpi-card__badge--positive">+12.5%</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">TOTAL DE ESTUDIANTES</p>
+          <p class="kpi-card__value">12,482</p>
+        </div>
+        <div class="kpi-card__bar">
+          <div class="kpi-card__bar-fill kpi-card__bar-fill--primary" style="width:75%"></div>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-card--secondary">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--secondary"><span
+              class="material-symbols-outlined">person_celebrate</span></div>
+          <span class="kpi-card__badge kpi-card__badge--neutral">Estable</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">PROFESORES ACTIVOS</p>
+          <p class="kpi-card__value">312</p>
+        </div>
+        <div class="kpi-card__bar">
+          <div class="kpi-card__bar-fill kpi-card__bar-fill--secondary" style="width:92%"></div>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-card--tertiary">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--tertiary"><span
+              class="material-symbols-outlined">event_available</span></div>
+          <span class="kpi-card__badge kpi-card__badge--negative">-2.1%</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">ASISTENCIA PROMEDIO</p>
+          <p class="kpi-card__value">94.2%</p>
+        </div>
+        <div class="kpi-card__bar">
+          <div class="kpi-card__bar-fill kpi-card__bar-fill--tertiary" style="width:94%"></div>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-card--error">
+        <div class="kpi-card__top">
+          <div class="kpi-card__icon kpi-card__icon--error"><span class="material-symbols-outlined">warning</span></div>
+          <span class="kpi-card__badge kpi-card__badge--neutral">Urgente</span>
+        </div>
+        <div>
+          <p class="kpi-card__label">ALERTAS PENDIENTES</p>
+          <p class="kpi-card__value">24</p>
+        </div>
+        <div class="kpi-card__bar">
+          <div class="kpi-card__bar-fill kpi-card__bar-fill--error" style="width:40%"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DASHBOARD GRID -->
+    <div class="dashboard-grid">
+      <div class="glass-card panel--table">
+        <div class="panel__header">
+          <div>
+            <h3 class="panel__title">Registros de Ingreso Recientes</h3>
+            <p class="panel__subtitle">Últimos registros capturados por el lector QR en portería.</p>
+          </div>
+          <button class="panel__link-btn" id="export-report-btn-2" type="button">
+            <span class="material-symbols-outlined" style="font-size:1rem;">download</span>
+            Exportar
+          </button>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Estudiante</th>
+                <th>Matrícula</th>
+                <th>Fecha y Hora</th>
+                <th>Registrado por</th>
+              </tr>
+            </thead>
+            <tbody id="registros-tbody">
+              <tr>
+                <td colspan="4" class="table-empty-state">Cargando registros…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================================================================
+       PIE DE PÁGINA
+       ================================================================= -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand-col">
+        <div class="site-footer__name">Ingreso Seguro</div>
+        <p class="site-footer__desc">Plataforma integral de gestión educativa: seguridad, asistencia y administración
+          institucional en un solo lugar.</p>
+        <div class="site-footer__logos">
+          <a class="site-footer__logo-slot" href="https://www.seduca.gov.co/" target="_blank" rel="noopener noreferrer"
+            aria-label="Logo institución 1 — ir al sitio de la institución"><img
+              src="logo-institucion-1.jpeg" alt="Logo institución 1" /></a>
+          <a class="site-footer__logo-slot" href="https://pascualbravo.edu.co/" target="_blank"
+            rel="noopener noreferrer" aria-label="Logo institución 2 — ir al sitio de la institución"><img
+              src="logo-institucion-2.jpeg" alt="Logo institución 2" /></a>
+          <a class="site-footer__logo-slot" href="https://www.iesanantoniodeprado.edu.co/" target="_blank"
+            rel="noopener noreferrer" aria-label="Logo institución 3 — ir al sitio de la institución"><img
+              src="escudo-sadep.png" alt="Logo institución 3" /></a>
+        </div>
+      </div>
+      <div class="site-footer__cols">
+        <div>
+          <p class="site-footer__col-title">Nosotros</p>
+          <div class="site-footer__col-links">
+            <a href="nosotros.html">Quiénes somos</a>
+            <a href="nosotros.html">Nuestro equipo</a>
+          </div>
+        </div>
+        <div>
+          <p class="site-footer__col-title">Ayuda</p>
+          <div class="site-footer__col-links">
+            <a href="#">Centro de soporte</a>
+            <a href="#">Preguntas frecuentes</a>
+            <a href="#">Reportar un problema</a>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="site-footer__bottom">
+        <div class="site-footer__copy">© 2026 Ingreso Seguro</div>
+      </div>
+  </footer>
+
+  <script src="jspdf.umd.min.js"></script>
+  <script src="jspdf.plugin.autotable.min.js"></script>
+  <script src="dashboard.js" defer></script>
+  <script src="theme-toggle.js" defer></script>
+</body>
+
+</html>
