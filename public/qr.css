@@ -1,0 +1,191 @@
+/* ============================================================
+   qr.css — Página de lectura de código QR / registro de asistencia
+   ============================================================ */
+
+.qr-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.side-col { display: flex; flex-direction: column; gap: var(--space-md); }
+
+/* ── Panel del escáner ──────────────────────────────────────── */
+.scanner-panel { border-radius: var(--radius-lg); overflow: hidden; }
+.scanner-body { padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-md); }
+
+.scanner-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scanner-viewport video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.scanner-viewport.is-active video { display: block; }
+
+.scanner-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--on-surface-variant);
+  text-align: center;
+  padding: 1.5rem;
+}
+.scanner-placeholder .material-symbols-outlined { font-size: 2.5rem; color: var(--outline); }
+.scanner-viewport.is-active .scanner-placeholder { display: none; }
+
+.scanner-reticle {
+  position: absolute;
+  inset: 12%;
+  border: 2px solid rgba(173, 198, 255, 0.6);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+  display: none;
+}
+.scanner-viewport.is-active .scanner-reticle { display: block; }
+.scanner-reticle::before,
+.scanner-reticle::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--primary);
+}
+.scanner-reticle::before { top: -2px; left: -2px; border-top: 3px solid var(--primary); border-left: 3px solid var(--primary); }
+.scanner-reticle::after { bottom: -2px; right: -2px; border-bottom: 3px solid var(--primary); border-right: 3px solid var(--primary); }
+
+.scanner-status {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-full);
+  background: rgba(11, 14, 21, 0.75);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+.scanner-status.is-scanning { color: var(--primary); }
+.scanner-status.is-found    { color: var(--secondary); }
+.scanner-status.is-error    { color: var(--error); }
+
+.scanner-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.scanner-alt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--outline-variant);
+}
+.scanner-alt__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.scanner-alt__label { font-size: 13px; color: var(--on-surface-variant); }
+
+.file-upload-btn {
+  position: relative;
+  overflow: hidden;
+}
+.file-upload-btn input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* ── Panel lateral: último registro ────────────────────────── */
+.scan-result-card { border-radius: var(--radius-lg); padding: var(--space-md); }
+.scan-result-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  color: var(--on-surface-variant);
+  padding: 1.5rem 0.5rem;
+}
+.scan-result-empty .material-symbols-outlined { font-size: 2.25rem; color: var(--outline); }
+
+.scan-result {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+.scan-result__avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-full);
+  background: rgba(173, 198, 255, 0.12);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.scan-result__name { font-weight: 600; color: var(--on-background); }
+.scan-result__meta { font-size: 13px; color: var(--on-surface-variant); }
+.scan-result__time { font-size: 11px; color: var(--outline); margin-top: 0.25rem; }
+
+/* ── Tabla de registros recientes ──────────────────────────── */
+.recent-scans { border-radius: var(--radius-lg); overflow: hidden; }
+.recent-scans .table-scroll { max-height: 320px; overflow-y: auto; }
+.recent-scans-empty { padding: var(--space-md); color: var(--on-surface-variant); font-size: 13px; text-align: center; }
+
+/* ── Códigos QR de prueba (para evaluación sin cámara) ────── */
+.qr-samples { border-radius: var(--radius-lg); padding: var(--space-md); }
+.qr-samples__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.qr-sample {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--surface-container-high);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.qr-sample:hover { border-color: var(--primary); }
+.qr-sample img {
+  width: 72px;
+  height: 72px;
+  background: #fff;
+  border-radius: 4px;
+  padding: 4px;
+}
+.qr-sample__name { font-size: 11px; font-weight: 600; color: var(--on-background); text-align: center; }
+.qr-sample__hint { font-size: 10px; color: var(--on-surface-variant); text-align: center; }
+
+@media (min-width: 1024px) {
+  .qr-grid { grid-template-columns: 1.4fr 1fr; align-items: start; }
+}

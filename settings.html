@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <script>
+    // Aplica el tema guardado ANTES del primer pintado para evitar el
+    // parpadeo (flash) de un tema incorrecto al cargar la página. Es un
+    // duplicado mínimo intencional de la lógica de theme-toggle.js: ese
+    // archivo se carga con "defer" (después del primer render) y no
+    // serviría para evitar el parpadeo si esta parte no fuera inline.
+    (function () {
+      try {
+        var t = localStorage.getItem('ingreso-seguro-theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>Ingreso Seguro</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="shared1.css"/>
+  <link rel="stylesheet" href="settings.css"/>
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="polish.css" />
+</head>
+<body>
+
+
+  <nav class="topnav">
+    <div class="topnav__left">
+      <span class="topnav__logo">Ingreso Seguro</span>
+      <div class="topnav__links">
+        <a class="topnav__link" href="/">Inicio</a>
+        <a class="topnav__link" href="dashboard.html">Panel de control</a>
+        <a class="topnav__link" href="students.html">Estudiantes</a>
+        <a class="topnav__link" href="admin.html">Administrador</a>
+        <a class="topnav__link topnav__link--active" href="settings.html">Configuración</a>
+        <a class="topnav__link" href="/login">Cerrar sesión</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="settings-inner">
+
+      <div class="settings-page-header">
+        <h1 class="text-h1">Perfil</h1>
+        <p class="text-body-md">Administra tu perfil.</p>
+      </div>
+
+      <div class="bento-grid">
+
+        <div class="section-card col-6">
+          <div class="section-card-header">
+            <h3 class="text-h3">Información personal</h3>
+          </div>
+          <div class="section-card-body">
+
+            <div class="profile-row">
+              <div class="avatar-photo">
+                <div class="avatar-photo-overlay">
+                  <span class="material-symbols-outlined">photo_camera</span>
+                </div>
+              </div>
+              <div class="profile-row-text">
+                <p class="profile-name">Jefferson Lopez</p>
+                <p class="profile-role">Administrador</p>
+              </div>
+            </div>
+
+            <div class="info-grid">
+              <div class="field">
+                <label>Nombre completo</label>
+                <input type="text" value="Jefferson Lopez"/>
+              </div>
+              <div class="field">
+                <label>Correo electrónico</label>
+                <input type="email" value="jefferson.lopez@ingresoseguro.edu.co"/>
+              </div>
+              <div class="field span-2">
+                <label>Cargo</label>
+                <div class="field-readonly">
+                  <span>Administrador</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="section-card-footer">
+            <button class="btn btn-primary btn-sm">Guardar cambios</button>
+          </div>
+        </div>
+
+        <div class="section-card col-6">
+          <div class="section-card-header">
+            <h3 class="text-h3">Seguridad y acceso</h3>
+          </div>
+          <div class="section-card-body">
+            <div class="password-fields">
+              <div class="field">
+                <label>Contraseña actual</label>
+                <input type="password" placeholder="••••••••"/>
+              </div>
+
+              <div class="field">
+                <label>Nueva contraseña</label>
+                <input type="password"/>
+              </div>
+
+              <div class="field">
+                <label>Confirmar contraseña</label>
+                <input type="password"/>
+              </div>
+
+              <button class="btn btn-surface btn-full">Actualizar contraseña</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand-col">
+        <div class="site-footer__name">Ingreso Seguro</div>
+        <p class="site-footer__desc">Plataforma integral de gestión educativa: seguridad, asistencia y administración
+          institucional en un solo lugar.</p>
+        <div class="site-footer__logos">
+          <a class="site-footer__logo-slot" href="https://www.seduca.gov.co/" target="_blank" rel="noopener noreferrer"
+            aria-label="Logo institución 1 — ir al sitio de la institución"><img
+              src="logo-institucion-1.jpeg" alt="Logo institución 1" /></a>
+          <a class="site-footer__logo-slot" href="https://pascualbravo.edu.co/" target="_blank"
+            rel="noopener noreferrer" aria-label="Logo institución 2 — ir al sitio de la institución"><img
+              src="logo-institucion-2.jpeg" alt="Logo institución 2" /></a>
+          <a class="site-footer__logo-slot" href="https://www.iesanantoniodeprado.edu.co/" target="_blank"
+            rel="noopener noreferrer" aria-label="Logo institución 3 — ir al sitio de la institución"><img
+              src="escudo-sadep.png" alt="Logo institución 3" /></a>
+        </div>
+      </div>
+      <div class="site-footer__cols">
+        <div>
+          <p class="site-footer__col-title">Nosotros</p>
+          <div class="site-footer__col-links">
+            <a href="nosotros.html">Quiénes somos</a>
+            <a href="nosotros.html">Nuestro equipo</a>
+          </div>
+        </div>
+        <div>
+          <p class="site-footer__col-title">Ayuda</p>
+          <div class="site-footer__col-links">
+            <a href="#">Centro de soporte</a>
+            <a href="#">Preguntas frecuentes</a>
+            <a href="#">Reportar un problema</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="site-footer__copy">© 2026 Ingreso Seguro</div>
+    </div>
+  </footer>
+
+  <script src="theme-toggle.js" defer></script>
+</body>
+</html>

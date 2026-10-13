@@ -1,0 +1,258 @@
+/* ============================================================
+   theme.css — Sistema de variables (tokens) único de Ingreso Seguro
+
+   · Define UNA sola vez la paleta, la escala de espaciado, los radios y
+     las variables semánticas para modo oscuro (por defecto) y claro.
+   · Se carga después del CSS propio de cada página y sustituye a las
+     variables duplicadas de shared.css, shared1.css, inicio.css,
+     nosotros.css y admin.css (que definían valores contradictorios).
+   · Los componentes se estilan en polish.css usando estos tokens.
+   ============================================================ */
+
+/* ── MODO OSCURO (por defecto) ─────────────────────────────── */
+:root {
+  color-scheme: dark;
+
+  /* Superficies: cinco niveles de profundidad claramente distintos */
+  --background:                #10131a;   /* fondo general            */
+  --surface:                   #10131a;
+  --surface-dim:               #0d1017;
+  --surface-bright:            #2c3443;
+  --surface-variant:           #2c3443;
+  --surface-container-lowest:  #0b0e15;   /* footer, zonas hundidas   */
+  --surface-container-low:     #151922;   /* secciones alternas       */
+  --surface-container:         #1b202b;   /* tarjetas                 */
+  --surface-container-high:    #232a37;   /* tarjetas elevadas, thead */
+  --surface-container-highest: #2c3443;   /* hover, menús, modales    */
+  --inverse-surface:           #e4e7ef;
+  --inverse-on-surface:        #2e3038;
+  --inverse-primary:           #2358d8;
+  --surface-tint:              #adc6ff;
+
+  /* Texto */
+  --on-background:             #e4e7ef;
+  --on-surface:                #e4e7ef;
+  --on-surface-variant:        #b3bbcc;
+  --outline:                   #8a93a8;
+  --outline-variant:           #2e3545;
+
+  /* Azul de marca */
+  --primary:                   #adc6ff;
+  --primary-fixed:             #d8e2ff;
+  --primary-fixed-dim:         #adc6ff;
+  --primary-container:         #4d8eff;
+  --on-primary:                #002e6a;
+  --on-primary-fixed:          #001a42;
+  --on-primary-fixed-variant:  #004395;
+  --on-primary-container:      #00285d;
+
+  --secondary:                 #b7c8e1;
+  --secondary-fixed:           #d3e4fe;
+  --secondary-fixed-dim:       #b7c8e1;
+  --secondary-container:       #3a4a5f;
+  --on-secondary:              #213145;
+  --on-secondary-fixed:        #0b1c30;
+  --on-secondary-fixed-variant:#38485d;
+  --on-secondary-container:    #a9bad3;
+
+  --tertiary:                  #ffb786;
+  --tertiary-fixed:            #ffdcc6;
+  --tertiary-fixed-dim:        #ffb786;
+  --tertiary-container:        #df7412;
+  --on-tertiary:               #502400;
+  --on-tertiary-fixed:         #311400;
+  --on-tertiary-fixed-variant: #723600;
+  --on-tertiary-container:     #461f00;
+  --accent:                    #ffb786;
+  --accent-container:          #df7412;
+  --on-accent-container:       #461f00;
+
+  --error:                     #ffb4ab;
+  --error-container:           #93000a;
+  --on-error:                  #690005;
+  --on-error-container:        #ffdad6;
+
+  --slate-50:  #f8fafc;
+  --slate-200: #e2e8f0;
+  --slate-400: #94a3b8;
+  --slate-500: #7b8798;
+  --slate-600: #5c6779;
+  --slate-700: #2e3545;
+  --slate-800: #232a37;
+  --slate-900: #1b202b;
+  --slate-950: #0b0e15;
+
+  --green:     #6fd6a0;
+  --green-dim: #4cc385;
+  --red:       #ffb4ab;
+  --orange:    #ffb786;
+  --blue:      #adc6ff;
+
+  /* ── Tokens semánticos (los usa polish.css) ── */
+  --border:          rgba(255, 255, 255, 0.08);
+  --border-strong:   rgba(255, 255, 255, 0.16);
+  --card-bg:         var(--surface-container);
+  --card-shadow:     0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-lg:       0 24px 48px -16px rgba(0, 0, 0, 0.55);
+  --nav-bg:          rgba(16, 19, 26, 0.88);
+  --footer-bg:       var(--surface-container-lowest);
+  --input-bg:        #0f131b;
+  --table-head-bg:   rgba(255, 255, 255, 0.035);
+  --row-hover:       rgba(255, 255, 255, 0.035);
+  --overlay:         rgba(5, 8, 14, 0.66);
+  --focus-ring:      #8fb4ff;
+  --hover-bg:        rgba(255, 255, 255, 0.06);
+  --modal-bg:        #232a37;
+  --nav-pad:         max(var(--page-x), calc((100% - var(--container)) / 2));
+
+  --btn-primary-bg:      #4d8eff;
+  --btn-primary-bg-hover:#6aa1ff;
+  --btn-primary-fg:      #04173a;
+  --accent-text:         #7fabff;          /* azul para texto/acentos  */
+  --tint-primary:        rgba(173, 198, 255, 0.12);
+  --tint-strong:         rgba(173, 198, 255, 0.18);
+
+  --ok:   #7bd8a8;
+  --warn: #f3b57c;
+  --bad:  #ffb4ab;
+
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%23b3bbcc' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E");
+
+  /* ── Escala única de espaciado / radios / tipografía ── */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+  --space-gutter: 20px;
+
+  --radius-sm:   0.375rem;   /* 6px  chips, badges pequeños        */
+  --radius-md:   0.5rem;     /* 8px  botones, inputs, iconos        */
+  --radius-lg:   0.75rem;    /* 12px tarjetas y paneles             */
+  --radius-xl:   1rem;       /* 16px modales y bloques grandes      */
+  --radius-full: 9999px;
+
+  --font-base: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --container: 80rem;        /* ancho máximo del contenido: 1280px  */
+  --page-x:    1.5rem;       /* margen lateral de página            */
+  --control-h: 2.75rem;      /* altura de botones e inputs (44px)   */
+  --nav-row:   4rem;         /* altura de una fila de navegación    */
+  --nav-h:     4rem;         /* altura total de la barra superior   */
+  --toggle-size: 2.5rem;
+}
+
+/* ── MODO CLARO ────────────────────────────────────────────── */
+html[data-theme="light"] {
+  color-scheme: light;
+
+  --background:                #f2f4f8;
+  --surface:                   #f2f4f8;
+  --surface-dim:               #e7ebf2;
+  --surface-bright:            #ffffff;
+  --surface-variant:           #e6eaf1;
+  --surface-container-lowest:  #ffffff;
+  --surface-container-low:     #f7f9fc;
+  --surface-container:         #ffffff;
+  --surface-container-high:    #eef1f6;
+  --surface-container-highest: #e5e9f0;
+  --inverse-surface:           #2e3038;
+  --inverse-on-surface:        #f1f0f7;
+  --inverse-primary:           #adc6ff;
+  --surface-tint:              #2358d8;
+
+  --on-background:             #141b2d;
+  --on-surface:                #141b2d;
+  --on-surface-variant:        #465066;
+  --outline:                   #667085;
+  --outline-variant:           #dde2ec;
+
+  --primary:                   #2358d8;
+  --primary-fixed:             #d8e2ff;
+  --primary-fixed-dim:         #adc6ff;
+  --primary-container:         #e3ecff;
+  --on-primary:                #ffffff;
+  --on-primary-fixed:          #001a42;
+  --on-primary-fixed-variant:  #004395;
+  --on-primary-container:      #143a99;
+
+  --secondary:                 #4b5675;
+  --secondary-fixed:           #d3e4fe;
+  --secondary-fixed-dim:       #b7c8e1;
+  --secondary-container:       #e3e8f5;
+  --on-secondary:              #ffffff;
+  --on-secondary-fixed:        #0b1c30;
+  --on-secondary-fixed-variant:#38485d;
+  --on-secondary-container:    #1f2944;
+
+  --tertiary:                  #a14f00;
+  --tertiary-fixed:            #ffdcc6;
+  --tertiary-fixed-dim:        #ffb786;
+  --tertiary-container:        #ffe7d1;
+  --on-tertiary:               #ffffff;
+  --on-tertiary-fixed:         #311400;
+  --on-tertiary-fixed-variant: #723600;
+  --on-tertiary-container:     #341100;
+  --accent:                    #a14f00;
+  --accent-container:          #ffe7d1;
+  --on-accent-container:       #341100;
+
+  --error:                     #b3261e;
+  --error-container:           #fde8e6;
+  --on-error:                  #ffffff;
+  --on-error-container:        #410002;
+
+  --slate-50:  #f8fafc;
+  --slate-200: #e2e8f0;
+  --slate-400: #64748b;
+  --slate-500: #526071;
+  --slate-600: #334155;
+  --slate-700: #cbd5e1;
+  --slate-800: #e7ecf5;
+  --slate-900: #f2f5fa;
+  --slate-950: #ffffff;
+
+  --green:     #15803d;
+  --green-dim: #166534;
+  --red:       #b3261e;
+  --orange:    #b45309;
+  --blue:      #2358d8;
+
+  --border:          #e1e5ee;
+  --border-strong:   #c7cedc;
+  --card-bg:         #ffffff;
+  --card-shadow:     0 1px 2px rgba(16, 24, 40, 0.05), 0 1px 3px rgba(16, 24, 40, 0.05);
+  --shadow-lg:       0 24px 48px -16px rgba(16, 24, 40, 0.28);
+  --nav-bg:          rgba(255, 255, 255, 0.92);
+  --footer-bg:       #ffffff;
+  --input-bg:        #ffffff;
+  --table-head-bg:   #f5f7fb;
+  --row-hover:       #f5f7fb;
+  --overlay:         rgba(16, 24, 40, 0.48);
+  --focus-ring:      #2358d8;
+  --hover-bg:        rgba(16, 24, 40, 0.05);
+  --modal-bg:        #ffffff;
+
+  --btn-primary-bg:      #2358d8;
+  --btn-primary-bg-hover:#1c48b3;
+  --btn-primary-fg:      #ffffff;
+  --accent-text:         #2358d8;
+  --tint-primary:        rgba(35, 88, 216, 0.09);
+  --tint-strong:         rgba(35, 88, 216, 0.14);
+
+  --ok:   #15803d;
+  --warn: #a35a05;
+  --bad:  #b3261e;
+
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%23465066' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E");
+}
+
+/* ── Alturas de navegación por tamaño de pantalla ──────────── */
+/* < 1200px: dos filas (marca + enlaces) para que no haya desbordes */
+@media (max-width: 1199px) {
+  :root { --nav-row: 3.5rem; --nav-h: 6rem; }
+}
+@media (max-width: 640px) {
+  :root { --page-x: 1rem; }
+}

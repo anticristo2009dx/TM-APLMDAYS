@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-accent="blue" data-font-size="normal" data-font-family="sans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portafolio y hoja de vida de Diego Antonio Rivero Carrasco, estudiante de técnico auxiliar en desarrollo de software en Medellín, Colombia.">
+  <title>Portafolio y Hoja de Vida - Desarrollador de Software</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Estilos propios de las secciones añadidas (Sobre mí y aporte de hobbies) */
+    .about-text { color: var(--text-secondary); font-size: 1.02rem; }
+    .about-text + .about-text { margin-top: 0.75rem; }
+    .hobby-benefit {
+      margin-top: 0.6rem;
+      padding-top: 0.6rem;
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      text-align: left;
+    }
+    .hobby-benefit strong { color: var(--accent-primary); }
+    .avatar-photo {
+      width: 160px; height: 160px; border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--bg-card);
+      box-shadow: var(--shadow-md);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- BARRA DE HERRAMIENTAS: accesibilidad y personalización -->
+  <header class="toolbar" role="banner">
+    <div class="container toolbar-content">
+      <a href="#" class="brand-logo" aria-label="Inicio Portafolio">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        <span>DevCV</span>
+      </a>
+
+      <div class="controls-group" role="region" aria-label="Personalización y Accesibilidad">
+        <div class="control-item">
+          <span class="control-label">Texto</span>
+          <button id="btn-font-small" title="Texto Pequeño" aria-label="Texto pequeño">A-</button>
+          <button id="btn-font-normal" title="Texto Normal" aria-label="Texto normal">A</button>
+          <button id="btn-font-large" title="Texto Grande" aria-label="Texto grande">A+</button>
+        </div>
+
+        <div class="control-item">
+          <span class="control-label">Fuente</span>
+          <select id="select-font-family" aria-label="Seleccionar Tipo de Fuente">
+            <option value="sans">Sans-serif</option>
+            <option value="mono">Monospace (Dev)</option>
+            <option value="serif">Serif</option>
+          </select>
+        </div>
+
+        <div class="control-item">
+          <span class="control-label">Acento</span>
+          <button class="btn-accent-picker" data-color="blue" title="Azul Educativo" aria-label="Acento Azul"></button>
+          <button class="btn-accent-picker" data-color="green" title="Verde Tech" aria-label="Acento Verde"></button>
+          <button class="btn-accent-picker" data-color="purple" title="Violeta Código" aria-label="Acento Violeta"></button>
+          <button class="btn-accent-picker" data-color="orange" title="Naranja Innovación" aria-label="Acento Naranja"></button>
+        </div>
+
+        <div class="control-item">
+          <span class="control-label">Tema</span>
+          <select id="select-theme" aria-label="Seleccionar Tema de Color">
+            <option value="light">☀️ Claro</option>
+            <option value="dark">🌙 Oscuro</option>
+            <option value="high-contrast">👁️ Alto Contraste</option>
+          </select>
+        </div>
+
+        <button id="btn-print" class="btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.85rem;" title="Imprimir o guardar PDF">
+          🖨️ PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+
+    <!-- HERO -->
+    <section class="hero-section" aria-label="Presentación Profesional">
+      <div class="hero-card">
+
+        <div class="avatar-container">
+          <!-- Foto: guarda tu imagen como assets/foto.jpg. Si no existe, se muestran las iniciales. -->
+          <img class="avatar-photo" src="assets/foto.jpg" alt="Foto de Diego Antonio Rivero Carrasco"
+               onerror="this.outerHTML='<div class=&quot;avatar-placeholder&quot; aria-hidden=&quot;true&quot;>DR</div>'">
+        </div>
+
+        <div class="hero-info">
+          <h1>Diego Antonio Rivero Carrasco</h1>
+          <div class="hero-subtitle">Estudiante a tecnico auxiliar en desarrollo de software</div>
+          <p class="hero-summary">
+            Soy un estudiante aspirante a ingenieria en desarrollo de software, me gusta la paz, estar tranquilo y hablar con personas que tengan intereses en comun conmigo
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contacto" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              Contactar
+            </a>
+            <button onclick="window.print()" class="btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Descargar CV
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="main-grid">
+
+      <!-- COLUMNA IZQUIERDA -->
+      <aside class="sidebar-column">
+
+        <article class="card" id="contacto">
+          <h2 class="section-title"><span>📍</span> Contacto</h2>
+          <ul class="contact-list">
+            <li class="contact-item">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>Medellin, Colombia</span>
+            </li>
+            <li class="contact-item">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <a href="mailto:driverocarrasco@gmail.com">driverocarrasco@gmail.com</a>
+            </li>
+            <li class="contact-item">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span>+57 324 4071399</span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2 class="section-title"><span>💻</span> Habilidades Técnicas</h2>
+
+          <div class="skills-group">
+            <div class="skills-group-title">Lenguajes</div>
+            <div class="skills-tags">
+              <span class="skill-badge">JavaScript</span>
+              <span class="skill-badge">Python</span>
+              <span class="skill-badge">java</span>
+              <span class="skill-badge">php</span>
+            </div>
+          </div>
+
+          <div class="skills-group">
+            <div class="skills-group-title">Frameworks & Libs</div>
+            <div class="skills-tags">
+              <span class="skill-badge">Node.js</span>
+            </div>
+          </div>
+
+          <div class="skills-group">
+            <div class="skills-group-title">Herramientas & BD</div>
+            <div class="skills-tags">
+              <span class="skill-badge">Git & GitHub</span>
+              <span class="skill-badge">xampp</span>
+              <span class="skill-badge">mySQL</span>
+              <span class="skill-badge">VS Code</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2 class="section-title"><span>🧠</span> Soft Skills</h2>
+          <div class="soft-skills-grid">
+            <div class="soft-skill-card">Trabajo en Equipo</div>
+            <div class="soft-skill-card">Resolución de Problemas</div>
+            <div class="soft-skill-card">Liderazgo</div>
+            <div class="soft-skill-card">Pensamiento Crítico</div>
+            <div class="soft-skill-card">Adaptabilidad</div>
+            <div class="soft-skill-card">Comunicación Asertiva</div>
+          </div>
+        </article>
+
+      </aside>
+
+      <!-- COLUMNA DERECHA -->
+      <section class="content-column">
+
+        <!-- SOBRE MÍ (nuevo; redactado solo con datos ya dados. Pendiente: visión a futuro) -->
+        <article class="card" id="sobre-mi">
+          <h2 class="section-title"><span>👋</span> Sobre mí</h2>
+          <p class="about-text">
+            Soy Diego, estudiante de técnico auxiliar en desarrollo de software en Medellín, y aspiro a convertirme en ingeniero de software. Me gusta la paz, estar tranquilo y conversar con personas con las que comparto intereses.
+          </p>
+          <p class="about-text">
+            Lo que me mueve es resolver problemas reales con tecnología: mi proyecto más reciente reemplaza el papel y el lapicero por un registro automático y seguro en mi colegio.
+          </p>
+          <p class="about-text">
+            Mi visión es graduarme como ingeniero y llegar a ocupar un buen puesto como desarrollador de software, creciendo con cada proyecto en el que participe.
+          </p>
+        </article>
+
+        <!-- EDUCACIÓN Y EXPERIENCIA -->
+        <article class="card">
+          <h2 class="section-title"><span>🎓</span> Educación & Formación</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">2025- presente</div>
+              <h3 class="timeline-title">Tecnica auxiliar en desarrollo de software</h3>
+              <div class="timeline-institution">Institucion Educativa San Antonio De Prado, Institucion Universitaria Pascual Bravo</div>
+              <p class="timeline-desc">
+                materias destacadas: Base de datos, logica C, ingles
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROYECTOS -->
+        <article class="card">
+          <h2 class="section-title"><span>🚀</span> Proyectos Destacados</h2>
+          <div class="projects-grid">
+
+            <div class="project-card" data-category="web javascript">
+              <div>
+                <h3 class="project-title">Sistema de asistencias y registro de llegadas tarde con base a codigos QR</h3>
+                <p class="project-desc">
+                  un sistema para la educacion educativa san antonio de prado que registra las asistencias y llegadas tarde de los estudiantes, resolviendo asi el uso de papel y lapicero para un registro mas automatico y seguro
+                </p>
+              </div>
+              <div class="project-links"></div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- HOBBIES -->
+        <article class="card">
+          <h2 class="section-title"><span>🎨</span> Hobbies e Intereses</h2>
+          <div class="hobbies-grid">
+
+            <div class="hobby-item">
+              <div class="hobby-icon">🎮</div>
+              <div class="hobby-title">Videojuegos</div>
+              <div class="hobby-desc">Me gustan los videojuegos por la libertado que ofrecen, los retos, me gustan los videojuegos con especial enfasis en puzzles, supervivencia y deportes</div>
+              <p class="hobby-benefit"><strong>Me aporta:</strong> resolución de problemas y perseverancia ante retos difíciles.</p>
+            </div>
+
+            <div class="hobby-item">
+              <div class="hobby-icon">🛹</div>
+              <div class="hobby-title">Skateboarding</div>
+              <div class="hobby-desc">Tengo pasion hacia el deporte extremo del Skateboarding, practico la rama de Skatepark</div>
+              <p class="hobby-benefit"><strong>Me aporta:</strong> constancia y tolerancia al error: se aprende cayéndose y volviendo a intentar.</p>
+            </div>
+
+            <div class="hobby-item">
+              <div class="hobby-icon">📖</div>
+              <div class="hobby-title">Lectura</div>
+              <div class="hobby-desc">Me gusta leer literatura novelica, con especial enfoque en distopias y psicologia humana, especialmente autores como George Orwell, Fiodor Dostoievsky y Edgar Allan Poe</div>
+              <p class="hobby-benefit"><strong>Me aporta:</strong> pensamiento crítico y empatía para entender a las personas que usan lo que construyo.</p>
+            </div>
+
+          </div>
+        </article>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p>© <span id="year"></span> Diego Antonio Rivero Carrasco - Portafolio & CV Profesional.</p>
+      <a href="#" class="back-to-top">↑ Volver arriba</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

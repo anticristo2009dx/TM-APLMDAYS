@@ -1,0 +1,26 @@
+[
+  {
+    "code": "ISQR-2024-8842",
+    "name": "Mariana Gómez",
+    "id": "#2024-8842",
+    "estado": "Activo"
+  },
+  {
+    "code": "ISQR-2024-1105",
+    "name": "Santiago Restrepo",
+    "id": "#2024-1105",
+    "estado": "En Prueba"
+  },
+  {
+    "code": "ISQR-2024-9221",
+    "name": "Valentina Ortiz",
+    "id": "#2024-9221",
+    "estado": "Activo"
+  },
+  {
+    "code": "ISQR-2024-4412",
+    "name": "Juan Pablo Cardona",
+    "id": "#2024-4412",
+    "estado": "Suspendido"
+  }
+]
