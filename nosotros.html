@@ -17,7 +17,7 @@
           t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         }
         document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {}
+      } catch (e) { }
     })();
   </script>
   <title>Nosotros — Ingreso Seguro</title>
@@ -36,14 +36,11 @@
 
   <nav class="topnav">
     <div class="topnav__left">
-      <span class="topnav__logo">Ingreso Seguro</span>
-      <div class="topnav__links">
-        <a class="topnav__link" href="/">Inicio</a>
-        <a class="topnav__link" href="dashboard.html">Panel de control</a>
-        <a class="topnav__link" href="students.html">Estudiantes</a>
-        <a class="topnav__link" href="admin.html">Administrador</a>
-        <a class="topnav__link" href="settings.html">Configuración</a>
-        <a class="topnav__link" href="/login">Cerrar sesión</a>
+      <div class="nosotros-back-group">
+        <button type="button" class="topnav__icon-btn" id="nosotros-back-btn" aria-label="Volver a la página anterior">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+        </button>
+        <span class="topnav__logo">Ingreso Seguro</span>
       </div>
     </div>
   </nav>
@@ -75,53 +72,67 @@
           <p class="team-card__role">Líder de Proyecto - Backend</p>
           <p class="team-card__bio">Lidera la visión del producto y la relación con la institución educativa.</p>
           <div class="team-card__socials">
-            <a class="team-card__social" href="mailto:diegoriveo@sanantoniodeprado.edu.co" aria-label="Enviar correo a Diego"><span class="material-symbols-outlined">mail</span></a>
-            <a class="team-card__social" href="equipo-diego/index.html" aria-label="Ver hoja de vida de Diego"><span class="material-symbols-outlined">link</span></a>
+            <a class="team-card__social" href="mailto:diegorivero@iesanantoniodeprado.edu.co"
+              aria-label="Enviar correo a Diego"><span class="material-symbols-outlined">mail</span></a>
+            <a class="team-card__social" href="equipo-diego/index.html" aria-label="Ver hoja de vida de Diego"
+              target="_blank"><span class="material-symbols-outlined">link</span></a>
           </div>
         </div>
       </div>
 
       <div class="team-card glass-panel">
         <div class="team-card__photo">
-          <span class="team-card__initials">SR</span>
+          <img src="foto-sebastia-rodriguez.jpeg" alt="Foto de Sebastián Rodríguez"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <span class="material-symbols-outlined" style="display:none">person</span>
         </div>
         <div class="team-card__body">
           <p class="team-card__name">Sebastián Rodríguez</p>
           <p class="team-card__role">Desarrollador Frontend</p>
           <p class="team-card__bio">Construye y mantiene la infraestructura de seguridad y control de acceso.</p>
           <div class="team-card__socials">
-            <a class="team-card__social" href="mailto:sebastianrcardona42@gmail.com" aria-label="Enviar correo a Sebastián"><span class="material-symbols-outlined">mail</span></a>
-            <a class="team-card__social" href="equipo-sebastian/index.html" aria-label="Ver hoja de vida de Sebastián"><span class="material-symbols-outlined">link</span></a>
+            <a class="team-card__social" href="mailto:sebastianrodriguez@iesanantoniodeprado.edu.co"
+              aria-label="Enviar correo a Sebastián"><span class="material-symbols-outlined">mail</span></a>
+            <a class="team-card__social" href="equipo-sebastian/index.html" aria-label="Ver hoja de vida de Sebastián"
+              target="_blank"><span class="material-symbols-outlined">link</span></a>
           </div>
         </div>
       </div>
 
       <div class="team-card glass-panel">
         <div class="team-card__photo">
-          <span class="team-card__initials">LC</span>
+          <img src="foto-lever-contreras.jpeg" alt="Foto de Lever David Contreras Mazo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <span class="material-symbols-outlined" style="display:none">person</span>
         </div>
         <div class="team-card__body">
           <p class="team-card__name">Lever David Contreras Mazo</p>
           <p class="team-card__role">Complementador Frontend y documentación</p>
           <p class="team-card__bio">Diseña la experiencia visual para que cualquier usuario navegue sin fricción.</p>
           <div class="team-card__socials">
-            <a class="team-card__social" href="mailto:levercontreras@iesanantoniodeprado.edu.co" aria-label="Enviar correo a Lever"><span class="material-symbols-outlined">mail</span></a>
-            <a class="team-card__social" href="equipo-lever/index.html" aria-label="Ver hoja de vida de Lever"><span class="material-symbols-outlined">link</span></a>
+            <a class="team-card__social" href="mailto:levercontreras@iesanantoniodeprado.edu.co"
+              aria-label="Enviar correo a Lever"><span class="material-symbols-outlined">mail</span></a>
+            <a class="team-card__social" href="equipo-lever/index.html" aria-label="Ver hoja de vida de Lever"
+              target="_blank"><span class="material-symbols-outlined">link</span></a>
           </div>
         </div>
       </div>
 
       <div class="team-card glass-panel">
         <div class="team-card__photo">
-          <span class="team-card__initials">JA</span>
+          <img src="foto-julian-arboleda.jpeg" alt="Foto de Julián Andrés Arboleda"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <span class="material-symbols-outlined" style="display:none">person</span>
         </div>
         <div class="team-card__body">
           <p class="team-card__name">Julián Andrés Arboleda</p>
           <p class="team-card__role">Documentación</p>
           <p class="team-card__bio">Acompaña a la institución en la implementación y resuelve incidencias.</p>
           <div class="team-card__socials">
-            <a class="team-card__social" href="mailto:julianarboleda@iesanantoniodeprado.edu.co" aria-label="Enviar correo a Julián"><span class="material-symbols-outlined">mail</span></a>
-            <a class="team-card__social" href="equipo-julian/index.html" aria-label="Ver hoja de vida de Julián"><span class="material-symbols-outlined">link</span></a>
+            <a class="team-card__social" href="mailto:julianarboleda@iesanantoniodeprado.edu.co"
+              aria-label="Enviar correo a Julián"><span class="material-symbols-outlined">mail</span></a>
+            <a class="team-card__social" href="equipo-julian/index.html" aria-label="Ver hoja de vida de Julián"
+              target="_blank"><span class="material-symbols-outlined">link</span></a>
           </div>
         </div>
       </div>
@@ -156,8 +167,8 @@
           institucional en un solo lugar.</p>
         <div class="site-footer__logos">
           <a class="site-footer__logo-slot" href="https://www.seduca.gov.co/" target="_blank" rel="noopener noreferrer"
-            aria-label="Logo institución 1 — ir al sitio de la institución"><img
-              src="logo-institucion-1.jpeg" alt="Logo institución 1" /></a>
+            aria-label="Logo institución 1 — ir al sitio de la institución"><img src="logo-institucion-1.jpeg"
+              alt="Logo institución 1" /></a>
           <a class="site-footer__logo-slot" href="https://pascualbravo.edu.co/" target="_blank"
             rel="noopener noreferrer" aria-label="Logo institución 2 — ir al sitio de la institución"><img
               src="logo-institucion-2.jpeg" alt="Logo institución 2" /></a>
@@ -174,14 +185,6 @@
             <a href="nosotros.html">Nuestro equipo</a>
           </div>
         </div>
-        <div>
-          <p class="site-footer__col-title">Ayuda</p>
-          <div class="site-footer__col-links">
-            <a href="#">Centro de soporte</a>
-            <a href="#">Preguntas frecuentes</a>
-            <a href="#">Reportar un problema</a>
-          </div>
-        </div>
       </div>
     </div>
     <div class="site-footer__bottom">
@@ -190,6 +193,18 @@
   </footer>
 
 
+  <script>
+    // Vuelve a la página desde la que llegó el usuario (por ejemplo, el
+    // botón "Conocer más" de la portada). Si no hay una página anterior
+    // en el historial (se abrió este enlace directamente), lleva a inicio.
+    document.getElementById("nosotros-back-btn").addEventListener("click", function () {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "/";
+      }
+    });
+  </script>
   <script src="theme-toggle.js" defer></script>
 </body>
 

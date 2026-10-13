@@ -362,9 +362,11 @@ td { padding: 16px var(--space-md); }
 .row-actions { position: relative; display: inline-block; }
 
 .row-actions-menu {
-  position: absolute;
-  top: calc(100% + 4px);
-  right: 0;
+  /* position: fixed (en vez de absolute) a propósito: así el menú no
+     queda recortado por el overflow:hidden de .table-wrapper ni por el
+     overflow-x:auto de .table-scroll. La posición real (top/left) la
+     calcula students.js con getBoundingClientRect() al abrirlo. */
+  position: fixed;
   z-index: 60;
   min-width: 12rem;
   background: var(--surface-container);

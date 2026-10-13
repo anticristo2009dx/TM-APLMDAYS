@@ -139,7 +139,7 @@
       var tdAction = document.createElement("td");
       tdAction.innerHTML =
         '<div class="row-actions">' +
-        '<button class="action-btn" data-open-menu="' + s.matricula + '"><span class="material-symbols-outlined">more_vert</span></button>' +
+        '<button class="action-btn" data-open-menu="' + s.matricula + '" aria-haspopup="menu" aria-expanded="false" aria-label="Más opciones para ' + s.nombre + '"><span class="material-symbols-outlined" aria-hidden="true">more_vert</span></button>' +
         "</div>";
       tr.appendChild(tdAction);
 
@@ -158,7 +158,8 @@
 
     var prevBtn = document.createElement("button");
     prevBtn.className = "page-btn";
-    prevBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px">chevron_left</span>';
+    prevBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px" aria-hidden="true">chevron_left</span>';
+    prevBtn.setAttribute("aria-label", "Página anterior");
     prevBtn.disabled = currentPage === 1;
     prevBtn.addEventListener("click", function () { goToPage(currentPage - 1); });
     paginationControls.appendChild(prevBtn);
@@ -168,6 +169,8 @@
         var btn = document.createElement("button");
         btn.className = "page-btn" + (page === currentPage ? " active" : "");
         btn.textContent = page;
+        btn.setAttribute("aria-label", "Página " + page);
+        if (page === currentPage) btn.setAttribute("aria-current", "page");
         btn.addEventListener("click", function () { goToPage(page); });
         paginationControls.appendChild(btn);
       })(p);
@@ -175,7 +178,8 @@
 
     var nextBtn = document.createElement("button");
     nextBtn.className = "page-btn";
-    nextBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>';
+    nextBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px" aria-hidden="true">chevron_right</span>';
+    nextBtn.setAttribute("aria-label", "Página siguiente");
     nextBtn.disabled = currentPage === totalPages;
     nextBtn.addEventListener("click", function () { goToPage(currentPage + 1); });
     paginationControls.appendChild(nextBtn);
@@ -282,26 +286,34 @@
   var rowMenu = document.createElement("div");
   rowMenu.className = "row-actions-menu";
   rowMenu.id = "row-actions-menu";
+  rowMenu.setAttribute("role", "menu");
   rowMenu.hidden = true;
   var menuButtonsHtml =
-    '<button data-action="qr"><span class="material-symbols-outlined">qr_code_2</span>Ver código QR</button>';
+    '<button role="menuitem" data-action="qr"><span class="material-symbols-outlined" aria-hidden="true">qr_code_2</span>Ver código QR</button>';
   if (IS_ADMIN) {
     menuButtonsHtml +=
-      '<button data-action="edit"><span class="material-symbols-outlined">edit</span>Editar información</button>' +
-      '<button class="danger" data-action="delete"><span class="material-symbols-outlined">delete</span>Borrar estudiante</button>';
+      '<button role="menuitem" data-action="edit"><span class="material-symbols-outlined" aria-hidden="true">edit</span>Editar información</button>' +
+      '<button role="menuitem" class="danger" data-action="delete"><span class="material-symbols-outlined" aria-hidden="true">delete</span>Borrar estudiante</button>';
   }
   rowMenu.innerHTML = menuButtonsHtml;
   document.body.appendChild(rowMenu);
 
   var openMenuMatricula = null;
+  var openMenuBtn = null;
 
   function closeAllMenus() {
     rowMenu.hidden = true;
     openMenuMatricula = null;
+    if (openMenuBtn) {
+      openMenuBtn.setAttribute("aria-expanded", "false");
+      openMenuBtn = null;
+    }
   }
 
   function openMenuFor(btn, matricula) {
     openMenuMatricula = matricula;
+    openMenuBtn = btn;
+    btn.setAttribute("aria-expanded", "true");
     rowMenu.hidden = false;
 
     var rect = btn.getBoundingClientRect();

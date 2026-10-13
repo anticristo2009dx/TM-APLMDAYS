@@ -72,6 +72,17 @@
     return "badge-suspended";
   }
 
+  function mostrarResultado(student, time) {
+    setStatus("Código detectado", "found");
+    resultEmpty.hidden = true;
+    resultBox.hidden = false;
+    resultAvatar.textContent = initials(student.name);
+    resultName.textContent = student.name;
+    resultMeta.textContent = student.id + " · " + student.estado;
+    resultTime.textContent = "Registrado a las " + time;
+    addTableRow(student.name, student.estado, time);
+  }
+
   function registerScan(code) {
     var now = Date.now();
     /* evita registrar el mismo código dos veces en menos de 4s (rebote de cámara) */
@@ -79,25 +90,58 @@
     lastCode = code;
     lastCodeAt = now;
 
-    var student = DIRECTORY[code];
     var time = formatTime();
 
-    if (!student) {
-      setStatus("Código no reconocido", "error");
-      addTableRow("Código desconocido (" + code + ")", null, time);
+    /* Códigos de demostración (botón "Simular lectura"): se muestran igual
+       que antes y se intenta guardar el ingreso. */
+    var demo = DIRECTORY[code];
+    if (demo) {
+      mostrarResultado(demo, time);
+      guardarRegistroEnBD(code);
       return;
     }
 
-    setStatus("Código detectado", "found");
+    /* Cualquier otro código se valida contra la tabla `estudiantes` real:
+       así el QR propio de cada estudiante registrado funciona en portería. */
+    setStatus("Verificando código…", "scanning");
+    guardarRegistroEnBD(code)
+      .then(function (result) {
+        if (result && result.body && result.body.ok && result.body.estudiante) {
+          var e = result.body.estudiante;
+          mostrarResultado({ name: e.nombre, id: "#" + e.matricula, estado: e.estado }, time);
+        } else if (result && result.status === 404) {
+          setStatus("Código no reconocido", "error");
+          addTableRow("Código desconocido (" + code + ")", null, time);
+        } else {
+          setStatus((result && result.body && result.body.mensaje) || "No se pudo verificar el código", "error");
+        }
+      });
+  }
 
-    resultEmpty.hidden = true;
-    resultBox.hidden = false;
-    resultAvatar.textContent = initials(student.name);
-    resultName.textContent = student.name;
-    resultMeta.textContent = student.id + " · " + student.estado;
-    resultTime.textContent = "Registrado a las " + time;
-
-    addTableRow(student.name, student.estado, time);
+  /* ── Guardar el ingreso en la base de datos (tabla `registro`) ──
+     Devuelve una promesa con { status, body } para que registerScan
+     pueda mostrar al estudiante real. Si falla para un código de
+     demostración, no se interrumpe la experiencia: solo se avisa por
+     consola. */
+  function guardarRegistroEnBD(codigoQr) {
+    return fetch("/registro", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ codigo_qr: codigoQr })
+    })
+      .then(function (res) {
+        return res.json().then(function (data) { return { status: res.status, body: data }; });
+      })
+      .then(function (result) {
+        if (!result.body || !result.body.ok) {
+          console.warn("No se guardó el registro en la base de datos:", result.body && result.body.mensaje);
+        }
+        return result;
+      })
+      .catch(function (err) {
+        console.warn("No se pudo conectar con el servidor para guardar el registro:", err);
+        return { status: 0, body: { ok: false, mensaje: "Sin conexión con el servidor" } };
+      });
   }
 
   function addTableRow(name, estado, time) {

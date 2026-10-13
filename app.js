@@ -5,7 +5,8 @@ const app = express();
 const path = require('path');
 // se pone el urlencoded para recibir datos de formularios
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// límite ampliado: la foto del estudiante viaja como data URL en base64
+app.use(express.json({ limit: '8mb' }));
 
 
 // invocamos dotenv
@@ -377,7 +378,7 @@ app.post('/registro', ensureRole(ROLES.USUARIO, ROLES.ADMIN), (req, res) => {
         return res.status(401).json({ ok: false, mensaje: 'No hay una sesión de usuario válida.' });
     }
 
-    connection.query('SELECT matricula FROM estudiantes WHERE codigo_qr = ?', [codigoQr], (error, filas) => {
+    connection.query('SELECT matricula, nombre, estado FROM estudiantes WHERE codigo_qr = ?', [codigoQr], (error, filas) => {
         if (error) {
             console.log('Error en BD:', error);
             return res.status(500).json({ ok: false, mensaje: 'Error de conexión con la base de datos.' });
@@ -395,7 +396,12 @@ app.post('/registro', ensureRole(ROLES.USUARIO, ROLES.ADMIN), (req, res) => {
                     console.log('Error en BD:', errorInsert);
                     return res.status(500).json({ ok: false, mensaje: 'Error al guardar el registro en la base de datos.' });
                 }
-                return res.json({ ok: true, mensaje: 'Registro guardado.', id_registro: resultado.insertId });
+                return res.json({
+                    ok: true,
+                    mensaje: 'Registro guardado.',
+                    id_registro: resultado.insertId,
+                    estudiante: { matricula: matricula, nombre: filas[0].nombre, estado: filas[0].estado }
+                });
             }
         );
     });
@@ -470,82 +476,219 @@ app.get('/estudiantes', ensureRole(ROLES.USUARIO, ROLES.ADMIN), (req, res) => {
 });
 
 // ------------------------------------------------------------------
-// Crear nuevo estudiante desde el botón "Agregar Estudiante" del
-// panel de Administrador. La matrícula la asigna el colegio, así que
-// se recibe tal cual la escriba el Administrador (no se calcula);
-// el código QR sí se sigue generando automáticamente a partir de ella.
+// Helpers del registro de estudiantes
+// ------------------------------------------------------------------
+const MATRICULA_MAX = 2147483647;           // límite de una columna INT de MySQL
+const GRADOS_VALIDOS = ['6', '7', '8', '9', '10', '11'];
+const GRUPOS_POR_GRADO = 3;
+
+// La matrícula debe ser un entero positivo escrito solo con dígitos
+// (rechaza "12abc", negativos, decimales y números fuera del rango INT).
+function parseMatricula(valor) {
+    const texto = String(valor === undefined || valor === null ? '' : valor).trim();
+    if (!/^\d{1,10}$/.test(texto)) return null;
+    const numero = parseInt(texto, 10);
+    if (numero < 1 || numero > MATRICULA_MAX) return null;
+    return numero;
+}
+
+// Código QR propio del estudiante: "ISQR-2026-" + últimos 4 dígitos de su
+// matrícula (mismo formato de los estudiantes ya cargados en la BD). Como
+// `codigo_qr` es UNIQUE, si esos 4 dígitos ya los usa OTRO estudiante se usa
+// la matrícula completa, así cada QR identifica a un solo estudiante.
+function generarCodigoQr(matricula, callback) {
+    const base = 'ISQR-2026-' + String(matricula).slice(-4);
+    connection.query('SELECT matricula FROM estudiantes WHERE codigo_qr = ?', [base], (error, filas) => {
+        if (error) return callback(error);
+        if (filas.length === 0 || filas[0].matricula === matricula) return callback(null, base);
+        callback(null, 'ISQR-2026-' + matricula);
+    });
+}
+
+const SQL_ESTUDIANTE_POR_MATRICULA =
+    'SELECT e.matricula, e.nombre, e.codigo_qr, e.estado, e.asistencia, ' +
+    'g.grado AS grado, gr.numero_grupo AS grupo ' +
+    'FROM estudiantes e ' +
+    'JOIN grupos gr ON e.id_grupo = gr.id_grupo ' +
+    'JOIN grados g ON gr.id_grado = g.id_grado ' +
+    'WHERE e.matricula = ?';
+
+function tieneQr(estudiante) {
+    return !!(estudiante.codigo_qr && String(estudiante.codigo_qr).trim() !== '');
+}
+
+// ------------------------------------------------------------------
+// Consulta previa a registrar un estudiante: dada una matrícula,
+// indica si YA está en la base de datos (y devuelve sus datos reales:
+// nombre, grado, grupo) y cuál es el código QR que le corresponde.
+// La usa el formulario "Agregar estudiante" para tomar la matrícula
+// desde la BD en lugar de inventarla o calcularla.
+// ------------------------------------------------------------------
+app.get('/admin/estudiantes/consulta/:matricula', ensureRole(ROLES.ADMIN), (req, res) => {
+    const matricula = parseMatricula(req.params.matricula);
+    if (!matricula) {
+        return res.status(400).json({ ok: false, mensaje: 'La matrícula debe ser un número entero positivo.' });
+    }
+
+    connection.query(SQL_ESTUDIANTE_POR_MATRICULA, [matricula], (error, filas) => {
+        if (error) {
+            console.log('Error en BD:', error);
+            return res.status(500).json({ ok: false, mensaje: 'Error de conexión con la base de datos.' });
+        }
+
+        const existente = filas.length > 0 ? filas[0] : null;
+        if (existente && tieneQr(existente)) {
+            return res.json({ ok: true, existe: true, estudiante: existente, codigo_qr: existente.codigo_qr });
+        }
+
+        generarCodigoQr(matricula, (errorQr, codigoQr) => {
+            if (errorQr) {
+                console.log('Error en BD:', errorQr);
+                return res.status(500).json({ ok: false, mensaje: 'Error de conexión con la base de datos.' });
+            }
+            return res.json({ ok: true, existe: !!existente, estudiante: existente, codigo_qr: codigoQr });
+        });
+    });
+});
+
+// ------------------------------------------------------------------
+// Registrar estudiante desde el botón "Agregar Estudiante" del panel
+// de Administrador.
+//
+//  * La matrícula NUNCA se genera ni se calcula: la asigna el colegio
+//    y se toma de la base de datos.
+//  * Si la matrícula YA existe en `estudiantes`, se usan sus datos
+//    reales (nombre, grado, grupo) tal como están en la BD y se
+//    completa el registro: se guarda la foto (si se envió) y se asigna
+//    su código QR si todavía no tenía. Un QR ya emitido no se cambia.
+//  * Si la matrícula no existe, se crea el estudiante con esa
+//    matrícula y se genera su código QR propio.
 // ------------------------------------------------------------------
 app.post('/admin/estudiantes', ensureRole(ROLES.ADMIN), (req, res) => {
-    const matricula = parseInt(req.body.matricula, 10);
-    const nombre = (req.body.nombre || '').trim();
+    const matricula = parseMatricula(req.body.matricula);
+    const nombre = (req.body.nombre || '').toString().trim();
     const grado = (req.body.grado || '').toString().trim();
     const grupo = parseInt(req.body.grupo, 10);
     const fotoDataUrl = (req.body.foto || '').toString();
 
-    if (!matricula || !nombre || !grado || !grupo) {
-        return res.status(400).json({ ok: false, mensaje: 'Completa todos los campos obligatorios (incluida la matrícula).' });
+    if (!matricula) {
+        return res.status(400).json({ ok: false, mensaje: 'Ingresa una matrícula válida (número entero positivo).' });
     }
 
     let retrato = null;
     if (fotoDataUrl.indexOf('base64,') !== -1) {
         try {
             retrato = Buffer.from(fotoDataUrl.split('base64,')[1], 'base64');
+            if (retrato.length === 0) retrato = null;
         } catch (e) {
             retrato = null; // si la foto viene corrupta, se guarda el estudiante sin foto
         }
     }
 
-    connection.query('SELECT matricula FROM estudiantes WHERE matricula = ?', [matricula], (errorCheck, filasCheck) => {
-        if (errorCheck) {
-            console.log('Error en BD:', errorCheck);
-            return res.status(500).json({ ok: false, mensaje: 'Error de conexión con la base de datos.' });
-        }
+    function errorBD(err, mensaje) {
+        console.log('Error en BD:', err);
+        return res.status(500).json({ ok: false, mensaje: mensaje || 'Error de conexión con la base de datos.' });
+    }
+
+    connection.query(SQL_ESTUDIANTE_POR_MATRICULA, [matricula], (errorCheck, filasCheck) => {
+        if (errorCheck) return errorBD(errorCheck);
+
+        // ── Caso 1: la matrícula ya está en la base de datos ──────────
         if (filasCheck.length > 0) {
-            return res.status(409).json({ ok: false, mensaje: 'Ya existe un estudiante con esa matrícula.' });
+            const existente = filasCheck[0];
+
+            function responderExistente(codigoQr) {
+                return res.json({
+                    ok: true,
+                    existente: true,
+                    mensaje: 'Matrícula tomada de la base de datos. Registro completado.',
+                    estudiante: {
+                        matricula: existente.matricula,
+                        nombre: existente.nombre,
+                        grado: existente.grado,
+                        grupo: existente.grupo,
+                        codigo_qr: codigoQr,
+                        estado: existente.estado,
+                        asistencia: existente.asistencia
+                    }
+                });
+            }
+
+            function guardarCambios(codigoQr, esNuevoQr) {
+                if (!esNuevoQr && !retrato) return responderExistente(codigoQr);
+                const sets = [];
+                const params = [];
+                if (esNuevoQr) { sets.push('codigo_qr = ?'); params.push(codigoQr); }
+                if (retrato) { sets.push('retrato = ?'); params.push(retrato); }
+                params.push(matricula);
+                connection.query('UPDATE estudiantes SET ' + sets.join(', ') + ' WHERE matricula = ?', params, (errorUpd) => {
+                    if (errorUpd) return errorBD(errorUpd, 'Error al actualizar el estudiante en la base de datos.');
+                    return responderExistente(codigoQr);
+                });
+            }
+
+            if (tieneQr(existente)) return guardarCambios(existente.codigo_qr, false);
+
+            return generarCodigoQr(matricula, (errorQr, codigoQr) => {
+                if (errorQr) return errorBD(errorQr);
+                guardarCambios(codigoQr, true);
+            });
+        }
+
+        // ── Caso 2: matrícula nueva → se crea el estudiante ───────────
+        if (!nombre) {
+            return res.status(400).json({ ok: false, mensaje: 'Ingresa el nombre completo del estudiante.' });
+        }
+        if (GRADOS_VALIDOS.indexOf(grado) === -1) {
+            return res.status(400).json({ ok: false, mensaje: 'El grado seleccionado no es válido.' });
+        }
+        if (!(grupo >= 1 && grupo <= GRUPOS_POR_GRADO)) {
+            return res.status(400).json({ ok: false, mensaje: 'El grupo seleccionado no es válido.' });
         }
 
         resolverIdGrupo(grado, grupo, (error, idGrupo) => {
-            if (error) {
-                console.log('Error en BD:', error);
-                return res.status(500).json({ ok: false, mensaje: 'Error de conexión con la base de datos.' });
-            }
+            if (error) return errorBD(error);
 
-            const codigoQr = 'ISQR-2026-' + String(matricula).slice(-4);
+            generarCodigoQr(matricula, (errorQr, codigoQr) => {
+                if (errorQr) return errorBD(errorQr);
 
-            function insertar(codigo, esReintento) {
-                connection.query(
-                    'INSERT INTO estudiantes (matricula, nombre, retrato, codigo_qr, id_grupo, estado, asistencia) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                    [matricula, nombre, retrato, codigo, idGrupo, 'Activo', 100],
-                    (error3) => {
-                        if (error3) {
-                            // Dos matrículas distintas pueden terminar en los mismos 4
-                            // dígitos; como codigo_qr es único, se reintenta con la
-                            // matrícula completa para no bloquear la creación.
-                            if (error3.code === 'ER_DUP_ENTRY' && !esReintento && String(error3.message).indexOf('qr') !== -1) {
-                                return insertar('ISQR-2026-' + matricula, true);
+                function insertar(codigo, esReintento) {
+                    connection.query(
+                        'INSERT INTO estudiantes (matricula, nombre, retrato, codigo_qr, id_grupo, estado, asistencia) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                        [matricula, nombre, retrato, codigo, idGrupo, 'Activo', 100],
+                        (error3) => {
+                            if (error3) {
+                                if (error3.code === 'ER_DUP_ENTRY') {
+                                    // Alguien registró la misma matrícula justo ahora.
+                                    if (String(error3.message).toUpperCase().indexOf('PRIMARY') !== -1) {
+                                        return res.status(409).json({ ok: false, mensaje: 'Esa matrícula acaba de ser registrada. Vuelve a consultarla.' });
+                                    }
+                                    // Otro estudiante tomó ese QR en el mismo instante: matrícula completa.
+                                    if (!esReintento) return insertar('ISQR-2026-' + matricula, true);
+                                }
+                                return errorBD(error3, 'Error al guardar el estudiante en la base de datos.');
                             }
-                            console.log('Error en BD:', error3);
-                            return res.status(500).json({ ok: false, mensaje: 'Error al guardar el estudiante en la base de datos.' });
+
+                            return res.json({
+                                ok: true,
+                                existente: false,
+                                mensaje: 'Estudiante agregado correctamente.',
+                                estudiante: {
+                                    matricula: matricula,
+                                    nombre: nombre,
+                                    grado: grado,
+                                    grupo: grupo,
+                                    codigo_qr: codigo,
+                                    estado: 'Activo',
+                                    asistencia: 100
+                                }
+                            });
                         }
+                    );
+                }
 
-                        return res.json({
-                            ok: true,
-                            mensaje: 'Estudiante agregado correctamente.',
-                            estudiante: {
-                                matricula: matricula,
-                                nombre: nombre,
-                                grado: grado,
-                                grupo: grupo,
-                                codigo_qr: codigo,
-                                estado: 'Activo',
-                                asistencia: 100
-                            }
-                        });
-                    }
-                );
-            }
-
-            insertar(codigoQr, false);
+                insertar(codigoQr, false);
+            });
         });
     });
 });

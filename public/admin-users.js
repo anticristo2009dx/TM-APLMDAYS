@@ -2,7 +2,7 @@
    admin-users.js
    Da funcionalidad real al botón "Agregar Nuevo Usuario" del
    panel de Administrador: abre un modal, valida los datos y
-   crea el usuario (Profesor o Celador) directamente en la
+   crea el usuario (rol Usuario o Administrador) directamente en la
    base de datos a través de POST /admin/usuarios.
    ============================================================ */
 (function () {
@@ -76,7 +76,7 @@
     }
 
     if (!rolSelect.value) {
-      setFieldError(rolSelect, rolError, "Selecciona si es Profesor o Celador.");
+      setFieldError(rolSelect, rolError, "Selecciona un rol para el usuario.");
       valid = false;
     } else {
       clearFieldError(rolSelect, rolError);

@@ -281,7 +281,7 @@
                         <%= usuario.nombre %>
                       </td>
                       <td>
-                        <%= usuario.rol===2 ? 'Administrador' : (usuario.rol===1 ? 'Profesor' : 'Celador' ) %>
+                        <%= usuario.rol===2 ? 'Administrador' : 'Usuario' %>
                       </td>
                       <td>
                         <%= usuario.cedula %>
@@ -370,6 +370,13 @@
         <form class="modal-card__body" id="add-student-form" novalidate>
 
           <div class="field">
+            <label for="student-matricula">Matrícula</label>
+            <input id="student-matricula" name="matricula" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="10" required autocomplete="off" placeholder="Matrícula del colegio. Ej: 140147" />
+            <p class="field-hint" id="student-matricula-hint" hidden></p>
+            <p class="field-error" id="student-matricula-error" hidden></p>
+          </div>
+
+          <div class="field">
             <label for="student-nombre">Nombre completo</label>
             <input id="student-nombre" name="nombre" type="text" required autocomplete="off" />
             <p class="field-error" id="student-nombre-error" hidden></p>
@@ -413,9 +420,9 @@
           </div>
 
           <div class="modal-card__preview" id="qr-preview-row" hidden>
-            <span class="material-symbols-outlined">qr_code_2</span>
+            <canvas class="modal-card__preview-qr" id="qr-preview-canvas" width="60" height="60"></canvas>
             <div>
-              <p class="modal-card__preview-label">Matrícula y código QR (se generan automáticamente)</p>
+              <p class="modal-card__preview-label" id="qr-preview-label">Código QR propio del estudiante</p>
               <p class="modal-card__preview-value" id="qr-preview-value">—</p>
             </div>
           </div>
@@ -435,7 +442,7 @@
     </div>
 
     <!-- ================================================================
-         MODAL: Agregar nuevo usuario (Profesor / Celador)
+         MODAL: Agregar nuevo usuario (rol Usuario)
          ================================================================= -->
     <div class="modal-overlay" id="add-user-overlay" hidden>
       <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="add-user-title">
@@ -464,7 +471,7 @@
               <label for="user-rol">Rol</label>
               <select id="user-rol" name="rol" required>
                 <option value="" disabled selected>Selecciona un rol</option>
-                <option value="1">Profesor</option>
+                <option value="1">Usuario</option>
                 <option value="2">Administrador</option>
               </select>
               <p class="field-error" id="user-rol-error" hidden></p>
@@ -521,9 +528,8 @@
             <div class="field">
               <label for="edit-user-rol">Rol</label>
               <select id="edit-user-rol" required>
-                <option value="1">Profesor</option>
+                <option value="1">Usuario</option>
                 <option value="2">Administrador</option>
-                <option value="3">Celador</option>
               </select>
             </div>
           </div>
@@ -598,7 +604,7 @@
             <span class="kpi-card__badge kpi-card__badge--neutral">Estable</span>
           </div>
           <div>
-            <p class="kpi-card__label">Profesores activos</p>
+            <p class="kpi-card__label">Usuarios activos</p>
             <p class="kpi-card__value">312</p>
           </div>
           <div class="kpi-card__bar">
@@ -1028,6 +1034,13 @@
             </div>
           </div>
 
+          <div class="danger-zone col-12">
+            <div>
+              <h3>Zona de riesgo</h3>
+              <p>Desactivar el acceso administrativo. Esta acción no se puede deshacer.</p>
+            </div>
+            <button class="btn btn-danger">Desactivar cuenta</button>
+          </div>
 
         </div>
       </div>
@@ -1059,8 +1072,10 @@
             <a href="/nosotros.html">Nuestro equipo</a>
           </div>
         </div>
-        </div>
       </div>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="site-footer__copy">© 2026 Ingreso Seguro</div>
     </div>
   </footer>
   </div>
@@ -1071,6 +1086,7 @@
   <script src="/jspdf.plugin.autotable.min.js"></script>
   <script src="/qrious.min.js"></script>
   <script src="/dashboard.js" defer></script>
+  <script>window.IS_ADMIN = true;</script>
   <script src="/students.js" defer></script>
   <script src="/admin-students.js" defer></script>
 

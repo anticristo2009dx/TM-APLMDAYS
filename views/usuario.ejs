@@ -49,7 +49,8 @@
 
   <script>
     /* Router mínimo, igual que en el panel de Administrador pero sin la
-       vista "admin" (los usuarios Profesor/Celador no tienen acceso a ella). */
+       vista "admin" (los usuarios con rol Usuario no tienen permisos de
+       administración, solo de registro por QR). */
     (function () {
       var TITULOS = {
         dashboard: "Panel de control",
@@ -156,7 +157,7 @@
             <span class="kpi-card__badge kpi-card__badge--neutral">Estable</span>
           </div>
           <div>
-            <p class="kpi-card__label">Profesores activos</p>
+            <p class="kpi-card__label">Usuarios activos</p>
             <p class="kpi-card__value">312</p>
           </div>
           <div class="kpi-card__bar">
@@ -259,14 +260,6 @@
           <div class="site-footer__col-links">
             <a href="/nosotros.html">Quiénes somos</a>
             <a href="/nosotros.html">Nuestro equipo</a>
-          </div>
-        </div>
-        <div>
-          <p class="site-footer__col-title">Ayuda</p>
-          <div class="site-footer__col-links">
-            <a href="#">Centro de soporte</a>
-            <a href="#">Preguntas frecuentes</a>
-            <a href="#">Reportar un problema</a>
           </div>
         </div>
       </div>
@@ -421,14 +414,6 @@
           <div class="site-footer__col-links">
             <a href="/nosotros.html">Quiénes somos</a>
             <a href="/nosotros.html">Nuestro equipo</a>
-          </div>
-        </div>
-        <div>
-          <p class="site-footer__col-title">Ayuda</p>
-          <div class="site-footer__col-links">
-            <a href="#">Centro de soporte</a>
-            <a href="#">Preguntas frecuentes</a>
-            <a href="#">Reportar un problema</a>
           </div>
         </div>
       </div>
@@ -642,14 +627,6 @@
             <a href="/nosotros.html">Nuestro equipo</a>
           </div>
         </div>
-        <div>
-          <p class="site-footer__col-title">Ayuda</p>
-          <div class="site-footer__col-links">
-            <a href="#">Centro de soporte</a>
-            <a href="#">Preguntas frecuentes</a>
-            <a href="#">Reportar un problema</a>
-          </div>
-        </div>
       </div>
     </div>
     <div class="site-footer__bottom">
@@ -666,6 +643,7 @@
   <script src="/jspdf.plugin.autotable.min.js"></script>
   <script src="/qrious.min.js"></script>
   <script src="/dashboard.js" defer></script>
+  <script>window.IS_ADMIN = false;</script>
   <script src="/students.js" defer></script>
   <script src="/theme-toggle.js" defer></script>
 </body>

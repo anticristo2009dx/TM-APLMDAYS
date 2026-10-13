@@ -7,7 +7,7 @@
    npm install
    ```
 2. Copia `env/.env.example` como `env/.env` y coloca los datos de tu
-   servidor MySQL/MariaDB (host, usuario, contraseña, nombre de la
+   servidor MySQL (host, usuario, contraseña, nombre de la
    base de datos `lefolde`).
 3. Importa el esquema si todavía no lo has hecho:
    ```
